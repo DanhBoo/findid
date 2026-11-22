@@ -21,42 +21,71 @@
   <div class="langs"><button type="button" data-set="en">EN</button><button type="button" data-set="vi">VI</button></div>
 </div></header>
 
-<main class="wrap dlpage">
+<main class="wrap dlpage" data-version="0.4.7">
   <h1 lang="en">Download FindID</h1><h1 lang="vi">Tải FindID</h1>
-  <p class="lead" lang="en">Pick your computer, then how you want to install. The buy and install buttons open on the release day; testers can download now with a tester code.</p>
-  <p class="lead" lang="vi">Chọn loại máy, rồi chọn cách cài. Nút mua và cài mở vào ngày phát hành; người dùng thử tải ngay được bằng mã dùng thử.</p>
+  <p class="lead" lang="en">Pick your computer and the package. Until the release, downloads need a tester code.</p>
+  <p class="lead" lang="vi">Chọn loại máy và gói tải. Trước ngày phát hành, cần mã dùng thử để tải.</p>
 
   <div class="tabs" role="tablist">
     <a id="win" href="#win" role="tab" aria-controls="pane-win" aria-selected="true">Windows</a>
     <a id="mac" href="#mac" role="tab" aria-controls="pane-mac" aria-selected="false">Mac</a>
   </div>
 
-  <div class="pane on" id="pane-win" role="tabpanel" aria-labelledby="win">
-    <h2 lang="en">Do you have Creative Cloud?</h2><h2 lang="vi">Máy bạn có Creative Cloud?</h2>
-    <div class="routes">
-      <div class="route">
-        <h3 lang="en">Yes: install from Adobe</h3><h3 lang="vi">Có: cài từ Adobe</h3>
-        <p lang="en">Get FindID on Adobe Creative Cloud Marketplace. Creative Cloud installs it and keeps it up to date by itself.</p>
-        <p lang="vi">Lấy FindID trên Adobe Creative Cloud Marketplace. Creative Cloud tự cài và tự cập nhật.</p>
-        <span class="btn off" aria-disabled="true"><span lang="en">Coming soon</span><span lang="vi">Sắp ra mắt</span></span>
+  <div class="pane on" id="pane-win" data-os="win" role="tabpanel" aria-labelledby="win">
+    <div class="dlrow">
+      <div>
+        <a class="btn big dlbtn" href="#tester" data-pkg="cc"><span lang="en">Download FindID <span class="v"></span>– Creative Cloud</span><span lang="vi">Tải FindID <span class="v"></span>– Creative Cloud</span></a>
+        <p class="lbl">Adobe Store</p>
       </div>
-      <div class="route">
-        <h3 lang="en">No: buy on findid.app</h3><h3 lang="vi">Không: mua tại findid.app</h3>
-        <p lang="en">Buy FindID here. The download link (.zip) arrives by email right after payment.</p>
-        <p lang="vi">Mua FindID ngay tại đây. Link tải (.zip) gửi qua email ngay sau khi trả tiền.</p>
-        <span class="btn off" aria-disabled="true"><span lang="en">Coming soon</span><span lang="vi">Sắp ra mắt</span></span>
-        <ol class="steps" lang="en">
-          <li><span>Close Photoshop and unzip the file from the email.</span></li>
-          <li><span>Copy the whole FindID folder into Photoshop's Plug-ins folder, for example <code>C:\Program Files\Adobe\Adobe Photoshop 2025\Plug-ins\</code>. If Windows asks for admin rights, click Continue.</span></li>
-          <li><span>Open Photoshop and choose Plugins &gt; FindID.</span></li>
-        </ol>
-        <ol class="steps" lang="vi">
-          <li><span>Tắt Photoshop và giải nén file trong email.</span></li>
-          <li><span>Chép nguyên thư mục FindID vào thư mục Plug-ins của Photoshop, ví dụ <code>C:\Program Files\Adobe\Adobe Photoshop 2025\Plug-ins\</code>. Windows hỏi quyền admin thì bấm Continue.</span></li>
-          <li><span>Mở Photoshop, chọn menu Plugins &gt; FindID.</span></li>
-        </ol>
+      <div>
+        <a class="btn big ghost dlbtn" href="#tester" data-pkg="win"><span lang="en">Download FindID <span class="v"></span></span><span lang="vi">Tải FindID <span class="v"></span></span></a>
+        <p class="lbl" lang="en">findid.app · card / Apple Pay / Google Pay</p>
+        <p class="lbl" lang="vi">findid.app · thẻ / Apple Pay / Google Pay</p>
+        <p lang="en">After paying, the download starts and the link is emailed to you.</p>
+        <p lang="vi">Trả tiền xong là tải về, link tải cũng gửi qua email.</p>
       </div>
     </div>
+  </div>
+  <div class="pane" id="pane-mac" data-os="mac" role="tabpanel" aria-labelledby="mac">
+    <div class="dlrow">
+      <div>
+        <a class="btn big dlbtn" href="#tester" data-pkg="mac"><span lang="en">Download FindID <span class="v"></span>– Creative Cloud</span><span lang="vi">Tải FindID <span class="v"></span>– Creative Cloud</span></a>
+        <p class="lbl">Adobe Store</p>
+      </div>
+      <div>
+        <a class="btn big ghost dlbtn" href="#tester" data-pkg="mac"><span lang="en">Download FindID <span class="v"></span>– Mac</span><span lang="vi">Tải FindID <span class="v"></span>– Mac</span></a>
+        <p class="lbl" lang="en">findid.app · card / Apple Pay / Google Pay</p>
+        <p class="lbl" lang="vi">findid.app · thẻ / Apple Pay / Google Pay</p>
+        <p lang="en">After paying, the download starts and the link is emailed to you.</p>
+        <p lang="vi">Trả tiền xong là tải về, link tải cũng gửi qua email.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="tester" id="tester">
+    <h2 lang="en">Have a tester code?</h2><h2 lang="vi">Có mã dùng thử?</h2>
+    <script type="application/json" id="tester-payload">[{"salt": "qvb+2rD7KuMPXbHh+Wna4w==", "iv": "YByKnfachjTyTchF", "ct": "dmVezYXh6MphTTKvhYfeKA3LwWnT1smkb172Pm4+Ab9cRir5VgRbby+803jXfZPXf9KnbdluCjx1LRjTQVYiiTc/sH1uHcNe8yOL1t9rDt9H/8diNihlQeE+cHI8mFfUGxH49+hofM93K8ecGUZv3YKxlTDkHOs0ML2z4ujsVhR3HH4OCgcOxYcRHj8FrFkOz2aEt0TrHAkH2EHlR9H1bQap3+D+dfeAkqzAYcNfp+VvTXnuWV1UJwvDGD0aBPLpvnsQi5qhaZ82IKeVh5fpelvXHLKFReK/HZPJuvxdsxUCmAAvK4qcuVTsQC/xXCFa7Ukav7y5x3d5ceBfcqwIYyGcOGEfTcHaYbYZwPKGvVOjcmtm1Ar3COI4s69tmpoBc6HJDe2WkFa9js3DHyHf0Nr1hVSfo9b6BT89mLb0hGyZ8SZsv4h1G7qNaLIU3/S9Am3mapeQ", "iter": 200000}, {"salt": "751sxyJIg00NHB6QpXpaKA==", "iv": "u0DQ0HTbGz1rajy7", "ct": "XMuhY7Uru2ThZgLIdG1TyHmqKB2iqJEqqWTtn+Zs6jyqtojr2EKyd5oU1hdoIAocKpkEN7qql9V0M57FsyFgEcY7XgY2R9S8YzPcj5hPYpYTzjxSrpM66NYOAwDQEvzaUcRLMIvYZzYt9z0kZyU0A7COOCIsAXVFrEtBHxt5CIMp8lu9xKd2THcR9DKDlKQb5+XiD00wkBwSE+DhMMXAsOmiRP2CV2Om3G0z4bBl+xT5GM+Ufu0BW0nyBFco69UDNLs+x+5MUVRHxipbsSACDmQ+oy3N0XpLVMsac9Z53vgTUgAOFxDzfuj3jmjB57ynHLYDNdeMoo6fotGjf88kotD+kHSNGVxCXPUz+uQO3OebUGHAZsyX2aPVhwDMixGu3omy0yatthiElFxbwAoNgBYj9S61eJaZywqyOAXk5PEo5bIq2nIynPkCp+zUAEayEPR85PQK", "iter": 200000}]</script>
+    <p class="tmsg" id="tester-none" lang="en">Not available yet.</p>
+    <p class="tmsg" id="tester-none-vi" lang="vi">Chưa có.</p>
+    <form id="tester-form" hidden>
+      <input id="tester-code" type="text" autocomplete="off" spellcheck="false" aria-label="Tester code / Mã dùng thử">
+      <button type="submit" class="btn ghost"><span lang="en">Use code</span><span lang="vi">Dùng mã</span></button>
+    </form>
+    <p class="tmsg" id="tester-hint" hidden><span lang="en">Enter your tester code to download.</span><span lang="vi">Nhập mã dùng thử để tải.</span></p>
+    <p class="tmsg" id="tester-bad" hidden><span lang="en">Code not valid.</span><span lang="vi">Mã không đúng.</span></p>
+    <p class="tmsg tok" id="tester-ok" hidden><span lang="en">Code accepted — download free.</span><span lang="vi">Mã đúng — tải miễn phí.</span></p>
+  </section>
+
+  <div class="pane on" id="pane-win-info" data-os="win">
+    <h2 lang="en">Install</h2><h2 lang="vi">Cài đặt</h2>
+    <ul class="req" lang="en">
+      <li><b>Adobe Store</b>Creative Cloud installs FindID and keeps it up to date.</li>
+      <li><b>findid.app</b>Unzip, copy the FindID folder into Photoshop's Plug-ins folder (<code>C:\Program Files\Adobe\Adobe Photoshop &lt;year&gt;\Plug-ins\</code>), then open Plugins &gt; FindID in Photoshop.</li>
+    </ul>
+    <ul class="req" lang="vi">
+      <li><b>Adobe Store</b>Creative Cloud tự cài và tự cập nhật FindID.</li>
+      <li><b>findid.app</b>Giải nén, chép thư mục FindID vào thư mục Plug-ins của Photoshop (<code>C:\Program Files\Adobe\Adobe Photoshop &lt;năm&gt;\Plug-ins\</code>), rồi mở Plugins &gt; FindID trong Photoshop.</li>
+    </ul>
     <h2 lang="en">System requirements</h2><h2 lang="vi">Cấu hình cần có</h2>
     <ul class="req" lang="en">
       <li><b>Windows</b>Windows 10 or 11</li>
@@ -67,37 +96,16 @@
       <li><b>Photoshop</b>Adobe Photoshop® 2023 (bản 24.0) trở lên</li>
     </ul>
   </div>
-
-  <div class="pane" id="pane-mac" role="tabpanel" aria-labelledby="mac">
-    <h2 lang="en">Installs through Creative Cloud</h2><h2 lang="vi">Cài qua Creative Cloud</h2>
-    <p lang="en">On a Mac, FindID installs through the Creative Cloud app, whichever way you get it.</p>
-    <p lang="vi">Trên Mac, FindID cài qua ứng dụng Creative Cloud, dù bạn lấy theo cách nào.</p>
-    <div class="routes">
-      <div class="route">
-        <h3 lang="en">Install from Adobe</h3><h3 lang="vi">Cài từ Adobe</h3>
-        <p lang="en">Get FindID on Adobe Creative Cloud Marketplace. Creative Cloud installs it and keeps it up to date by itself.</p>
-        <p lang="vi">Lấy FindID trên Adobe Creative Cloud Marketplace. Creative Cloud tự cài và tự cập nhật.</p>
-        <span class="btn off" aria-disabled="true"><span lang="en">Coming soon</span><span lang="vi">Sắp ra mắt</span></span>
-      </div>
-      <div class="route">
-        <h3 lang="en">Buy on findid.app</h3><h3 lang="vi">Mua tại findid.app</h3>
-        <p lang="en">Buy FindID here. The download link (.zip) arrives by email right after payment.</p>
-        <p lang="vi">Mua FindID ngay tại đây. Link tải (.zip) gửi qua email ngay sau khi trả tiền.</p>
-        <span class="btn off" aria-disabled="true"><span lang="en">Coming soon</span><span lang="vi">Sắp ra mắt</span></span>
-        <ol class="steps" lang="en">
-          <li><span>Close Photoshop and unzip the file from the email.</span></li>
-          <li><span>Double-click the FindID .ccx file. Creative Cloud asks to install the plugin: click Install, then OK. A new version replaces the old one.</span></li>
-          <li><span>Open Photoshop and choose Plugins &gt; FindID.</span></li>
-          <li><span>When macOS asks to let Photoshop read a folder (Desktop, Documents, Downloads, an external drive), click Allow, so FindID can see the files there.</span></li>
-        </ol>
-        <ol class="steps" lang="vi">
-          <li><span>Tắt Photoshop và giải nén file trong email.</span></li>
-          <li><span>Bấm đúp file FindID .ccx. Creative Cloud hỏi cài plugin: bấm Install, rồi OK. Bản mới tự thay bản cũ.</span></li>
-          <li><span>Mở Photoshop, chọn menu Plugins &gt; FindID.</span></li>
-          <li><span>macOS hỏi cho Photoshop đọc thư mục (Desktop, Documents, Downloads, ổ ngoài) thì bấm Allow, để FindID thấy file trong đó.</span></li>
-        </ol>
-      </div>
-    </div>
+  <div class="pane" id="pane-mac-info" data-os="mac">
+    <h2 lang="en">Install</h2><h2 lang="vi">Cài đặt</h2>
+    <ul class="req" lang="en">
+      <li><b>Adobe Store</b>Creative Cloud installs FindID and keeps it up to date.</li>
+      <li><b>findid.app</b>Unzip and double-click the .ccx file: Creative Cloud installs it (Install, then OK). When macOS asks to let Photoshop read a folder, click Allow.</li>
+    </ul>
+    <ul class="req" lang="vi">
+      <li><b>Adobe Store</b>Creative Cloud tự cài và tự cập nhật FindID.</li>
+      <li><b>findid.app</b>Giải nén, bấm đúp file .ccx: Creative Cloud tự cài (Install, rồi OK). macOS hỏi cho Photoshop đọc thư mục thì bấm Allow.</li>
+    </ul>
     <h2 lang="en">System requirements</h2><h2 lang="vi">Cấu hình cần có</h2>
     <ul class="req" lang="en">
       <li><b>Mac</b>with the Creative Cloud app</li>
@@ -109,22 +117,10 @@
     </ul>
   </div>
 
-  <section class="tester" id="tester">
-    <h2 lang="en">Have a tester code?</h2><h2 lang="vi">Có mã dùng thử?</h2>
-    <script type="application/json" id="tester-payload">[{"salt": "nX5iqa8XDfb9wL6Zf0G9Bg==", "iv": "4LyaJLN0NkDM/V7k", "ct": "xOUWTSBK6erhOfelOd3cn8MvGKaXmNsSjsIEpsySgmQ6qponu3CsdRrtTrWHs1T7N0SGp2t3/88lHyYiA8p5I0SXnRtxva1G2Sg3fBB/s3UmSZaIUO6kR5GpqltRuryxaepDCw==", "iter": 200000}, {"salt": "i9QuTcI6q8VqEXoRmwqhgg==", "iv": "LJ6aijSKmBBzmNjs", "ct": "Mw5PwBV9BHGukvV2FrFda2J4X0KXmkvZnvsyST5i/aKkFgLLvETDV+fKYSYYD2txAKJenGopBzE2hPfJQE8le76P8NDN9MlL3+K3Kd/RIoYosFSVfY/MWwEBEwqS0Zi3EcREKw==", "iter": 200000}]</script>
-    <p class="tmsg" id="tester-none" lang="en">Not available yet.</p>
-    <p class="tmsg" id="tester-none-vi" lang="vi">Chưa có.</p>
-    <form id="tester-form" hidden>
-      <input id="tester-code" type="text" autocomplete="off" spellcheck="false" aria-label="Tester code / Mã dùng thử">
-      <button type="submit" class="btn ghost"><span lang="en">Open</span><span lang="vi">Mở</span></button>
-    </form>
-    <p class="tmsg" id="tester-bad" hidden><span lang="en">Code not valid.</span><span lang="vi">Mã không đúng.</span></p>
-  </section>
-
   <section id="versions">
     <h2 lang="en">Versions</h2><h2 lang="vi">Các phiên bản</h2>
-    <p lang="en">Current version: 0.4.7 (testing), 22 Nov 2026. Updates: from Adobe, Creative Cloud updates FindID by itself; from findid.app, download the new version with the link in your order email or on your customer page. Your projects are kept.</p>
-    <p lang="vi">Phiên bản hiện tại: 0.4.7 (đang thử nghiệm), 22/11/2026. Cập nhật: cài từ Adobe thì Creative Cloud tự cập nhật; mua tại findid.app thì tải bản mới bằng link trong email đơn hàng hoặc trang khách hàng. Dự án của bạn vẫn giữ nguyên.</p>
+    <p lang="en">Current version: <span class="v"></span>(testing), 22 Nov 2026. Updates: from Adobe, Creative Cloud updates FindID by itself; from findid.app, download the new version with the link in your order email or on your customer page. Your projects are kept.</p>
+    <p lang="vi">Phiên bản hiện tại: <span class="v"></span>(đang thử nghiệm), 22/11/2026. Cập nhật: cài từ Adobe thì Creative Cloud tự cập nhật; mua tại findid.app thì tải bản mới bằng link trong email đơn hàng hoặc trang khách hàng. Dự án của bạn vẫn giữ nguyên.</p>
     <ol class="log">
       <li>
         <p class="ver"><b>0.4.7</b><span lang="en">22 Nov 2026, testing</span><span lang="vi">22/11/2026, đang thử nghiệm</span></p>
@@ -192,7 +188,7 @@
 
 <script>
 // Windows | Mac switch: #win / #mac in the URL picks the tab; no hash -> the visitor's OS (Mac only when it says so), else Windows.
-// Without this script both panes stay visible, Windows first.
+// A tab shows every .pane with its data-os. Without this script all panes stay visible, Windows first.
 (function () {
   var root = document.documentElement;
   root.classList.add('tabbed');
@@ -204,10 +200,9 @@
     var h = location.hash.replace('#', '');
     var k = h === 'mac' || h === 'win' ? h : (h ? null : osPick());
     if (!k) return;
-    ['win', 'mac'].forEach(function (o) {
-      document.getElementById(o).setAttribute('aria-selected', String(o === k));
-      document.getElementById('pane-' + o).classList.toggle('on', o === k);
-    });
+    ['win', 'mac'].forEach(function (o) { document.getElementById(o).setAttribute('aria-selected', String(o === k)); });
+    var ps = document.querySelectorAll('.pane[data-os]');
+    for (var i = 0; i < ps.length; i++) ps[i].classList.toggle('on', ps[i].getAttribute('data-os') === k);
   }
   select();
   window.addEventListener('hashchange', select);
@@ -215,14 +210,37 @@
 </script>
 
 <script>
-// Tester code: the typed code unlocks the encrypted download link in #tester-payload (same crypto as make_tester_link.py).
+// Version: every span.v shows "v<data-version of main> " (one place to change).
+// Download buttons before the release: locked, a click goes to the tester box (scroll, focus, "Enter your tester code to download")
+// and remembers the package; a valid code turns every button into its direct link (kept for this browser tab in sessionStorage)
+// and downloads the remembered package at once. The links come from #tester-payload (same crypto as make_tester_link.py).
 (function () {
+  var ver = document.querySelector('main[data-version]').getAttribute('data-version');
+  var vs = document.querySelectorAll('span.v');
+  for (var i = 0; i < vs.length; i++) vs[i].textContent = 'v' + ver + ' ';
+  var $ = function (id) { return document.getElementById(id); };
+  var btns = document.querySelectorAll('a.dlbtn[data-pkg]'), links = null, pending = null;
+  function apply(l) {
+    links = l;
+    for (var i = 0; i < btns.length; i++) { var u = l[btns[i].getAttribute('data-pkg')]; if (u) btns[i].href = u; }
+    $('tester-hint').hidden = true; $('tester-bad').hidden = true; $('tester-ok').hidden = false;
+  }
+  for (var k = 0; k < btns.length; k++) btns[k].addEventListener('click', function (ev) {
+    if (links && links[this.getAttribute('data-pkg')]) return;  // unlocked: the direct link opens as usual
+    ev.preventDefault();  // keep #win / #mac in the URL
+    pending = this.getAttribute('data-pkg');
+    $('tester').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    $('tester-hint').hidden = false;
+    var inp = $('tester-code');
+    if (inp.offsetParent) inp.focus({ preventScroll: true });
+  });
+  try { var saved = JSON.parse(sessionStorage.getItem('findid.tester') || 'null'); if (saved) apply(saved); } catch (e) { /* storage blocked: stay locked */ }
+
   var pl = null;
-  try { pl = JSON.parse(document.getElementById('tester-payload').textContent); } catch (e) { pl = null; }
+  try { pl = JSON.parse($('tester-payload').textContent); } catch (e) { pl = null; }
   if (!pl || !pl.length || !window.crypto || !crypto.subtle) return;
-  document.getElementById('tester-none').hidden = true;
-  document.getElementById('tester-none-vi').hidden = true;
-  var form = document.getElementById('tester-form'), bad = document.getElementById('tester-bad');
+  $('tester-none').hidden = true; $('tester-none-vi').hidden = true;
+  var form = $('tester-form');
   form.hidden = false;
   function b64(s) { var r = atob(s), a = new Uint8Array(r.length); for (var i = 0; i < r.length; i++) a[i] = r.charCodeAt(i); return a; }
   function tryOne(code, e) {
@@ -231,7 +249,7 @@
         k, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
     }).then(function (key) {
       return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(e.iv) }, key, b64(e.ct));
-    }).then(function (buf) { return new TextDecoder().decode(buf); });
+    }).then(function (buf) { return JSON.parse(new TextDecoder().decode(buf)); });
   }
   function unlock(code) {  // one entry per code: try them in turn, the first that decrypts wins
     code = code.trim().toLowerCase();
@@ -239,12 +257,15 @@
     function next() { return i >= pl.length ? Promise.reject(new Error('no entry')) : tryOne(code, pl[i++]).catch(next); }
     return next();
   }
-  window.findidTesterUnlock = unlock;  // used by the site check script
+  window.findidTesterUnlock = unlock;  // used by the site check scripts
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
-    bad.hidden = true;
-    unlock(document.getElementById('tester-code').value).then(function (url) { location.href = url; },
-      function () { bad.hidden = false; });  // wrong code: AES-GCM tag check fails
+    $('tester-bad').hidden = true;
+    unlock($('tester-code').value).then(function (l) {
+      try { sessionStorage.setItem('findid.tester', JSON.stringify(l)); } catch (e) { /* not kept: unlocked for this page only */ }
+      apply(l);
+      if (pending && l[pending]) location.href = l[pending];
+    }, function () { $('tester-bad').hidden = false; });  // wrong code: AES-GCM tag check fails, nothing changes
   });
 })();
 </script>
