@@ -16,6 +16,7 @@
     <a href="#how"><span lang="en">How Find works</span><span lang="vi">Cách Tìm hoạt động</span></a>
     <a href="#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
     <a href="#support"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
+    <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
   </nav>
   <div class="langs"><button type="button" data-set="en">EN</button><button type="button" data-set="vi">VI</button></div>
 </div></header>
@@ -28,12 +29,21 @@
   <h1 lang="vi">Tìm ra file PSD gốc của ảnh đã xuất. <span class="dim">Version nào cũng nằm đúng dự án.</span></h1>
   <p class="lead" lang="en">Drop a JPG or PNG on the panel and FindID shows the PSD / PSB it came from, with its project and version. Everything runs on your computer.</p>
   <p class="lead" lang="vi">Thả ảnh JPG / PNG vào panel, FindID hiện file PSD / PSB gốc kèm dự án và version. Mọi thứ chỉ chạy trên máy bạn.</p>
-  <div class="btns">
-    <a class="btn" href="#how"><span lang="en">See how Find works</span><span lang="vi">Xem cách Tìm hoạt động</span></a>
-    <a class="btn ghost" href="#availability"><span lang="en">Coming soon</span><span lang="vi">Sắp ra mắt</span></a>
+  <div class="btns dl" id="dl-btns">
+    <a class="btn big" href="download.html#win" data-os="win"><span lang="en">Download for Windows</span><span lang="vi">Tải cho Windows</span></a>
+    <a class="btn big ghost" href="download.html#mac" data-os="mac"><span lang="en">Download for Mac</span><span lang="vi">Tải cho Mac</span></a>
   </div>
-  <p class="fine" lang="en">Windows 10 / 11 · Adobe Photoshop® 2023 (24.0) or later</p>
-  <p class="fine" lang="vi">Windows 10 / 11 · Adobe Photoshop® 2023 (bản 24.0) trở lên</p>
+  <script>
+  // The button for the visitor's OS gets the solid style; no OS found (or not Mac) -> Windows stays solid, as in the markup.
+  (function () {
+    var p = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || '').toLowerCase();
+    if (!/mac/.test(p) || /iphone|ipad/.test(p)) return;
+    var bs = document.querySelectorAll('#dl-btns .btn');
+    for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('ghost', bs[i].getAttribute('data-os') !== 'mac');
+  })();
+  </script>
+  <p class="fine" lang="en">Coming soon · Windows 10 / 11 · Adobe Photoshop® 2023 (24.0) or later · Mac: not released yet</p>
+  <p class="fine" lang="vi">Sắp ra mắt · Windows 10 / 11 · Adobe Photoshop® 2023 (bản 24.0) trở lên · Mac: chưa phát hành</p>
   <div class="stage">
     <div class="canvas">
       <img src="media/sample_poster.jpg" width="960" height="720" alt="">
@@ -120,9 +130,9 @@
 </div></section>
 
 <section class="block" id="availability"><div class="wrap soon">
-  <h2 class="head2" lang="en">Coming soon</h2><h2 class="head2" lang="vi">Sắp ra mắt</h2>
-  <p lang="en">FindID for Windows 10 / 11, Adobe Photoshop® 2023 (24.0) or later, will be sold on Adobe Creative Cloud Marketplace and here on findid.app. macOS: not released yet. Questions: <a href="mailto:support@findid.app">support@findid.app</a>.</p>
-  <p lang="vi">FindID cho Windows 10 / 11, Adobe Photoshop® 2023 (bản 24.0) trở lên, sẽ bán trên Adobe Creative Cloud Marketplace và ngay tại findid.app. macOS: chưa phát hành. Hỏi đáp: <a href="mailto:support@findid.app">support@findid.app</a>.</p>
+  <h2 class="head2" lang="en">Get FindID</h2><h2 class="head2" lang="vi">Tải FindID</h2>
+  <p lang="en">Install from Adobe Creative Cloud Marketplace or buy here on findid.app. Versions and install steps are on the <a href="download.html">Download page</a>.</p>
+  <p lang="vi">Cài từ Adobe Creative Cloud Marketplace hoặc mua ngay tại findid.app. Các phiên bản và cách cài có ở <a href="download.html">trang Tải về</a>.</p>
 </div></section>
 
 <section class="block" id="faq"><div class="wrap faq">
@@ -148,6 +158,7 @@
 
 <footer class="bottom"><div class="wrap">
   <nav>
+    <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
     <a href="legal.html"><span lang="en">Licence &amp; Privacy</span><span lang="vi">Giấy phép &amp; Riêng tư</span></a>
     <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
   </nav>

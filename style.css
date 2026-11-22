@@ -1,4 +1,4 @@
-/* FindID site: one stylesheet for index.html and the 4 policy pages. System fonts only, no external files.
+/* FindID site: one stylesheet for index.html, download.html and the policy pages. System fonts only, no external files.
    Design brief: Photoshop/dev/qa/verify/vsite1122/brief.md (r2, 2026-11-22). */
 :root {
   --bg: #fafaf8; --surface: #f0f0ed; --raised: #ffffff; --text: #1d1d1f; --muted: #66666b; --line: #dddcd6;
@@ -50,6 +50,8 @@ html[data-lang="en"] .langs button[data-set="en"], html[data-lang="vi"] .langs b
   text-decoration: none; font-weight: 600; font-size: 16px; border: 1px solid var(--accent);
 }
 .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+.btn.big { padding: 16px 30px; font-size: 18px; min-width: 260px; text-align: center; }
+.btn.off { background: transparent; color: var(--muted); border: 1px dashed var(--line); cursor: not-allowed; font-weight: 600; }
 .fine { font-size: 14px; color: var(--muted); margin: 0; }
 
 /* hero */
@@ -117,11 +119,46 @@ footer.bottom p { margin: 0 0 6px; max-width: 60em; }
 .toc ol { margin: 0; padding-left: 1.3em; columns: 2 14em; column-gap: 28px; }
 .toc li { margin: 0 0 4px; break-inside: avoid; }
 
+/* download page (r3): Windows | Mac switch, two install routes side by side, changelog */
+.dlpage { padding-top: 48px; }
+.dlpage h1 { font-size: 48px; margin: 0 0 12px; }
+.dlpage .lead { font-size: 19px; color: var(--muted); max-width: 36em; margin: 0 0 28px; }
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 999px; margin: 0 0 8px; }
+.tabs a { scroll-margin-top: 600px; padding: 9px 22px; border-radius: 999px; color: var(--muted); text-decoration: none; font-weight: 600; font-size: 16px; }
+.tabs a[aria-selected="true"] { background: var(--text); color: var(--bg); }
+html.tabbed .pane:not(.on) { display: none; }
+.pane > h2, .dlpage section > h2 { font-size: 30px; margin: 0 0 18px; }
+.pane, .dlpage section { padding: 40px 0 0; }
+.routes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; }
+.route { border-top: 1px solid var(--line); padding-top: 20px; }
+.route h3 { font-size: 22px; margin: 0 0 8px; }
+.route p { margin: 0 0 14px; max-width: 30em; }
+.route .btn { margin: 4px 0 18px; }
+.route ol.steps li { padding: 12px 0; }
+.dlpage section p, .pane p { max-width: 36em; }
+.req { margin: 0; padding: 0; list-style: none; }
+.req li { border-top: 1px solid var(--line); padding: 12px 0; max-width: 36em; }
+.req b { display: inline-block; min-width: 9em; }
+.log { list-style: none; margin: 0; padding: 0; }
+.log > li { display: grid; grid-template-columns: 200px 1fr; gap: 6px 32px; border-top: 1px solid var(--line); padding: 18px 0; }
+.log .ver { font: 14px/1.6 var(--mono); color: var(--muted); margin: 0; }
+.log .ver b { display: block; color: var(--text); font-size: 15px; }
+.log ul { margin: 0; padding-left: 1.1em; max-width: 36em; }
+.log ul li { margin: 0 0 6px; }
+details.tester { margin: 56px 0 0; border-bottom: 0; font-size: 15px; color: var(--muted); }
+.tester summary { font-size: 15px; font-weight: 400; color: var(--muted); }
+.tester form { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+.tester input { font: 15px/1.4 var(--mono); padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); min-width: 0; flex: 0 1 240px; }
+.tester .btn { padding: 8px 16px; font-size: 15px; cursor: pointer; }
+.tester .tmsg { margin: 10px 0 0; }
+.tester [hidden] { display: none; }
+
 @media (max-width: 900px) {
   .stage { grid-template-columns: 1fr; justify-items: center; padding: 20px 12px; }
   .stage .canvas { display: none; }
   .feature, .feature:nth-of-type(even), .how, .faq { grid-template-columns: 1fr; }
   .feature:nth-of-type(even) .txt { order: 0; }
+  .routes { grid-template-columns: 1fr; }
   .feature .shot, .how .shot { justify-self: center; }
 }
 @media (max-width: 600px) {
@@ -135,5 +172,11 @@ footer.bottom p { margin: 0 0 6px; max-width: 60em; }
   .feature h3 { font-size: 22px; }
   .shot img { width: 100%; max-width: 360px; }
   .doc h1 { font-size: 28px; }
+  .btns.dl .btn.big { width: 100%; min-width: 0; }
+  .dlpage { padding-top: 32px; }
+  .dlpage h1 { font-size: 34px; }
+  .dlpage .lead { font-size: 17px; }
+  .pane > h2, .dlpage section > h2 { font-size: 24px; }
+  .log > li { grid-template-columns: 1fr; }
   footer.bottom { margin-top: 64px; }
 }
