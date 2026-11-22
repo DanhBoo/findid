@@ -23,8 +23,8 @@
 
 <main class="wrap dlpage">
   <h1 lang="en">Download FindID</h1><h1 lang="vi">Tải FindID</h1>
-  <p class="lead" lang="en">Pick your computer, then how you want to install. FindID is coming soon: the buttons below open on the release day.</p>
-  <p class="lead" lang="vi">Chọn loại máy, rồi chọn cách cài. FindID sắp ra mắt: các nút dưới đây mở vào ngày phát hành.</p>
+  <p class="lead" lang="en">Pick your computer, then how you want to install. The buy and install buttons open on the release day; testers can download now with a tester code.</p>
+  <p class="lead" lang="vi">Chọn loại máy, rồi chọn cách cài. Nút mua và cài mở vào ngày phát hành; người dùng thử tải ngay được bằng mã dùng thử.</p>
 
   <div class="tabs" role="tablist">
     <a id="win" href="#win" role="tab" aria-controls="pane-win" aria-selected="true">Windows</a>
@@ -69,19 +69,65 @@
   </div>
 
   <div class="pane" id="pane-mac" role="tabpanel" aria-labelledby="mac">
-    <h2 lang="en">FindID for Mac is not released yet</h2><h2 lang="vi">FindID cho Mac chưa phát hành</h2>
-    <p lang="en">The Mac version is still being tested, so there is nothing to buy or download for Mac yet. FindID for Windows needs Windows 10 or 11. Questions: <a href="mailto:support@findid.app">support@findid.app</a>.</p>
-    <p lang="vi">Bản Mac vẫn đang thử nghiệm, nên hiện chưa có gì để mua hay tải cho Mac. FindID cho Windows cần Windows 10 hoặc 11. Hỏi đáp: <a href="mailto:support@findid.app">support@findid.app</a>.</p>
-    <span class="btn off" aria-disabled="true"><span lang="en">Not released yet</span><span lang="vi">Chưa phát hành</span></span>
+    <h2 lang="en">Installs through Creative Cloud</h2><h2 lang="vi">Cài qua Creative Cloud</h2>
+    <p lang="en">On a Mac, FindID installs through the Creative Cloud app, whichever way you get it.</p>
+    <p lang="vi">Trên Mac, FindID cài qua ứng dụng Creative Cloud, dù bạn lấy theo cách nào.</p>
+    <div class="routes">
+      <div class="route">
+        <h3 lang="en">Install from Adobe</h3><h3 lang="vi">Cài từ Adobe</h3>
+        <p lang="en">Get FindID on Adobe Creative Cloud Marketplace. Creative Cloud installs it and keeps it up to date by itself.</p>
+        <p lang="vi">Lấy FindID trên Adobe Creative Cloud Marketplace. Creative Cloud tự cài và tự cập nhật.</p>
+        <span class="btn off" aria-disabled="true"><span lang="en">Coming soon</span><span lang="vi">Sắp ra mắt</span></span>
+      </div>
+      <div class="route">
+        <h3 lang="en">Buy on findid.app</h3><h3 lang="vi">Mua tại findid.app</h3>
+        <p lang="en">Buy FindID here. The download link (.zip) arrives by email right after payment.</p>
+        <p lang="vi">Mua FindID ngay tại đây. Link tải (.zip) gửi qua email ngay sau khi trả tiền.</p>
+        <span class="btn off" aria-disabled="true"><span lang="en">Coming soon</span><span lang="vi">Sắp ra mắt</span></span>
+        <ol class="steps" lang="en">
+          <li><span>Close Photoshop and unzip the file from the email.</span></li>
+          <li><span>Double-click the FindID .ccx file. Creative Cloud asks to install the plugin: click Install, then OK. A new version replaces the old one.</span></li>
+          <li><span>Open Photoshop and choose Plugins &gt; FindID.</span></li>
+          <li><span>When macOS asks to let Photoshop read a folder (Desktop, Documents, Downloads, an external drive), click Allow, so FindID can see the files there.</span></li>
+        </ol>
+        <ol class="steps" lang="vi">
+          <li><span>Tắt Photoshop và giải nén file trong email.</span></li>
+          <li><span>Bấm đúp file FindID .ccx. Creative Cloud hỏi cài plugin: bấm Install, rồi OK. Bản mới tự thay bản cũ.</span></li>
+          <li><span>Mở Photoshop, chọn menu Plugins &gt; FindID.</span></li>
+          <li><span>macOS hỏi cho Photoshop đọc thư mục (Desktop, Documents, Downloads, ổ ngoài) thì bấm Allow, để FindID thấy file trong đó.</span></li>
+        </ol>
+      </div>
+    </div>
+    <h2 lang="en">System requirements</h2><h2 lang="vi">Cấu hình cần có</h2>
+    <ul class="req" lang="en">
+      <li><b>Mac</b>with the Creative Cloud app</li>
+      <li><b>Photoshop</b>Adobe Photoshop® 2023 (24.0) or later</li>
+    </ul>
+    <ul class="req" lang="vi">
+      <li><b>Mac</b>có ứng dụng Creative Cloud</li>
+      <li><b>Photoshop</b>Adobe Photoshop® 2023 (bản 24.0) trở lên</li>
+    </ul>
   </div>
+
+  <section class="tester" id="tester">
+    <h2 lang="en">Have a tester code?</h2><h2 lang="vi">Có mã dùng thử?</h2>
+    <script type="application/json" id="tester-payload">[{"salt": "nX5iqa8XDfb9wL6Zf0G9Bg==", "iv": "4LyaJLN0NkDM/V7k", "ct": "xOUWTSBK6erhOfelOd3cn8MvGKaXmNsSjsIEpsySgmQ6qponu3CsdRrtTrWHs1T7N0SGp2t3/88lHyYiA8p5I0SXnRtxva1G2Sg3fBB/s3UmSZaIUO6kR5GpqltRuryxaepDCw==", "iter": 200000}, {"salt": "i9QuTcI6q8VqEXoRmwqhgg==", "iv": "LJ6aijSKmBBzmNjs", "ct": "Mw5PwBV9BHGukvV2FrFda2J4X0KXmkvZnvsyST5i/aKkFgLLvETDV+fKYSYYD2txAKJenGopBzE2hPfJQE8le76P8NDN9MlL3+K3Kd/RIoYosFSVfY/MWwEBEwqS0Zi3EcREKw==", "iter": 200000}]</script>
+    <p class="tmsg" id="tester-none" lang="en">Not available yet.</p>
+    <p class="tmsg" id="tester-none-vi" lang="vi">Chưa có.</p>
+    <form id="tester-form" hidden>
+      <input id="tester-code" type="text" autocomplete="off" spellcheck="false" aria-label="Tester code / Mã dùng thử">
+      <button type="submit" class="btn ghost"><span lang="en">Open</span><span lang="vi">Mở</span></button>
+    </form>
+    <p class="tmsg" id="tester-bad" hidden><span lang="en">Code not valid.</span><span lang="vi">Mã không đúng.</span></p>
+  </section>
 
   <section id="versions">
     <h2 lang="en">Versions</h2><h2 lang="vi">Các phiên bản</h2>
-    <p lang="en">Current version: not released yet. Updates: from Adobe, Creative Cloud updates FindID by itself; from findid.app, download the new version with the link in your order email or on your customer page. Your projects are kept.</p>
-    <p lang="vi">Phiên bản hiện tại: chưa phát hành. Cập nhật: cài từ Adobe thì Creative Cloud tự cập nhật; mua tại findid.app thì tải bản mới bằng link trong email đơn hàng hoặc trang khách hàng. Dự án của bạn vẫn giữ nguyên.</p>
+    <p lang="en">Current version: 0.4.7 (testing), 22 Nov 2026. Updates: from Adobe, Creative Cloud updates FindID by itself; from findid.app, download the new version with the link in your order email or on your customer page. Your projects are kept.</p>
+    <p lang="vi">Phiên bản hiện tại: 0.4.7 (đang thử nghiệm), 22/11/2026. Cập nhật: cài từ Adobe thì Creative Cloud tự cập nhật; mua tại findid.app thì tải bản mới bằng link trong email đơn hàng hoặc trang khách hàng. Dự án của bạn vẫn giữ nguyên.</p>
     <ol class="log">
       <li>
-        <p class="ver"><b lang="en">First release</b><b lang="vi">Bản phát hành đầu</b><span lang="en">in testing</span><span lang="vi">đang thử nghiệm</span></p>
+        <p class="ver"><b>0.4.7</b><span lang="en">22 Nov 2026, testing</span><span lang="vi">22/11/2026, đang thử nghiệm</span></p>
         <ul lang="en">
           <li>Find by image runs entirely inside the panel, with no extra program to allow, and it is faster.</li>
           <li>Cropped or resized pictures find their PSD more often; the best matches are grouped under one title.</li>
@@ -142,17 +188,6 @@
     <p lang="vi">Hoàn tiền và trợ giúp: <a href="support.html#refunds">trang Hỗ trợ</a>. Giấy phép và riêng tư: <a href="legal.html">Giấy phép &amp; Riêng tư</a>.</p>
   </section>
 
-  <details class="tester" id="tester">
-    <summary><span lang="en">Tester code</span><span lang="vi">Mã dùng thử</span></summary>
-    <script type="application/json" id="tester-payload">[{"salt": "nX5iqa8XDfb9wL6Zf0G9Bg==", "iv": "4LyaJLN0NkDM/V7k", "ct": "xOUWTSBK6erhOfelOd3cn8MvGKaXmNsSjsIEpsySgmQ6qponu3CsdRrtTrWHs1T7N0SGp2t3/88lHyYiA8p5I0SXnRtxva1G2Sg3fBB/s3UmSZaIUO6kR5GpqltRuryxaepDCw==", "iter": 200000}, {"salt": "i9QuTcI6q8VqEXoRmwqhgg==", "iv": "LJ6aijSKmBBzmNjs", "ct": "Mw5PwBV9BHGukvV2FrFda2J4X0KXmkvZnvsyST5i/aKkFgLLvETDV+fKYSYYD2txAKJenGopBzE2hPfJQE8le76P8NDN9MlL3+K3Kd/RIoYosFSVfY/MWwEBEwqS0Zi3EcREKw==", "iter": 200000}]</script>
-    <p class="tmsg" id="tester-none" lang="en">Not available yet.</p>
-    <p class="tmsg" id="tester-none-vi" lang="vi">Chưa có.</p>
-    <form id="tester-form" hidden>
-      <input id="tester-code" type="text" autocomplete="off" spellcheck="false" aria-label="Tester code / Mã dùng thử">
-      <button type="submit" class="btn ghost"><span lang="en">Open</span><span lang="vi">Mở</span></button>
-    </form>
-    <p class="tmsg" id="tester-bad" hidden><span lang="en">Code not valid.</span><span lang="vi">Mã không đúng.</span></p>
-  </details>
 </main>
 
 <script>

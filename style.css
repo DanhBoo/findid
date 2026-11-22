@@ -145,12 +145,10 @@ html.tabbed .pane:not(.on) { display: none; }
 .log .ver b { display: block; color: var(--text); font-size: 15px; }
 .log ul { margin: 0; padding-left: 1.1em; max-width: 36em; }
 .log ul li { margin: 0 0 6px; }
-details.tester { margin: 56px 0 0; border-bottom: 0; font-size: 15px; color: var(--muted); }
-.tester summary { font-size: 15px; font-weight: 400; color: var(--muted); }
 .tester form { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
 .tester input { font: 15px/1.4 var(--mono); padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); min-width: 0; flex: 0 1 240px; }
 .tester .btn { padding: 8px 16px; font-size: 15px; cursor: pointer; }
-.tester .tmsg { margin: 10px 0 0; }
+.tester .tmsg { margin: 10px 0 0; color: var(--muted); }
 .tester [hidden] { display: none; }
 
 @media (max-width: 900px) {
