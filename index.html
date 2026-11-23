@@ -11,6 +11,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="lang.js"></script>
+<script src="comments.js" defer></script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -19,6 +20,7 @@
     <a class="m-hide" href="#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
     <a class="m-hide" href="#how"><span lang="en">How FindID works</span><span lang="vi">FindID hoạt động thế nào</span></a>
     <a class="m-hide" href="#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
+    <a href="#comments"><span lang="en">Comments</span><span lang="vi">Bình luận</span></a>
     <a href="pricing.html"><span lang="en">Pricing</span><span lang="vi">Giá</span></a>
     <a class="m-hide" href="#support"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
@@ -75,30 +77,10 @@
   </div>
 </div></section>
 
-<section class="block" id="how"><div class="wrap how">
-  <div>
-    <h2 class="head2" lang="en">How FindID works</h2><h2 class="head2" lang="vi">FindID hoạt động thế nào</h2>
-    <ol class="steps" lang="en">
-      <li><span>When you save a version, FindID writes a small ID into the file info (<a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>, a standard Photoshop keeps inside each file). Layers and pixels are not touched.</span></li>
-      <li><span>Images you save from that version with Save a Copy, Save As or Save for Web carry the same ID, so FindID keeps them with their PSD even when they sit in different folders. Export As and Quick Export do not.</span></li>
-      <li><span>In Settings, add the folders that hold your files. In the Find tab, click Scan IDs once.</span></li>
-      <li><span>Drop an image on the Find box. With an ID, its PSD shows up straight away. Without one (a cropped or resized picture), FindID compares it with small previews of your PSDs and shows the closest.</span></li>
-    </ol>
-    <ol class="steps" lang="vi">
-      <li><span>Khi bạn lưu một version, FindID ghi một ID nhỏ vào phần thông tin file (<a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>, chuẩn Photoshop lưu bên trong mỗi file). Layer và điểm ảnh không bị đụng tới.</span></li>
-      <li><span>Ảnh lưu từ version đó bằng Save a Copy, Save As hay Save for Web mang cùng ID, nên FindID xếp chúng chung với PSD gốc dù nằm ở thư mục khác nhau. Export As và Quick Export thì không.</span></li>
-      <li><span>Trong Cài đặt, thêm các thư mục chứa file. Trong tab Tìm, bấm Quét ID một lần.</span></li>
-      <li><span>Thả ảnh vào ô Tìm. Ảnh có ID thì PSD hiện ngay. Ảnh không có ID (đã cắt hay đổi cỡ) thì FindID so với ảnh xem trước nhỏ của các PSD và hiện file giống nhất.</span></li>
-    </ol>
-    <p class="note" lang="en">All of this runs on your computer. FindID uploads nothing.</p>
-    <p class="note" lang="vi">Tất cả chạy trên máy bạn. FindID không tải gì lên mạng.</p>
-  </div>
-  <div class="shot">
-    <img lang="en" src="media/find_from_image_en.gif" width="480" height="218" loading="lazy" alt="Moving picture: drag an image onto the Find box">
-    <img lang="vi" src="media/find_from_image_vi.gif" width="480" height="218" loading="lazy" alt="Hình động: kéo ảnh vào ô Tìm">
-    <p class="caption" lang="en">The same moving picture plays in the panel's Help box.</p>
-    <p class="caption" lang="vi">Hình động này cũng chạy trong khung giải thích của panel.</p>
-  </div>
+<section class="block" id="how"><div class="wrap">
+  <h2 lang="en">How FindID works</h2><h2 lang="vi">FindID hoạt động thế nào</h2>
+  <p class="lead" lang="en">Photoshop keeps a small block of information inside each file, in a standard called <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID writes an ID there. When you Save As, Save a Copy or Save for Web to a JPG or PNG, the new file keeps the ID of the PSD it came from. FindID reads these IDs quickly in every folder you choose, so a PSD and the images made from it are grouped together even when they sit in different folders. Images without an ID (Export As, Quick Export, screenshots) are matched by their pixels instead.</p>
+  <p class="lead" lang="vi">Photoshop lưu một phần thông tin nhỏ bên trong mỗi file, theo chuẩn <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID ghi một mã ID vào đó. Khi bạn Save As, Save a Copy hay Save for Web ra JPG, PNG, file mới giữ mã của PSD gốc. FindID đọc nhanh các mã này trong mọi thư mục bạn chọn, nên PSD và các ảnh xuất ra từ nó được xếp chung dù nằm ở thư mục khác nhau. Ảnh không có mã (Export As, Quick Export, ảnh chụp màn hình) thì được so bằng điểm ảnh.</p>
 </div></section>
 <section class="block" id="features"><div class="wrap">
   <div class="feature">
@@ -109,8 +91,8 @@
       <p lang="vi">Thả ảnh đã xuất hoặc một PSD vào ô Tìm. Kết quả phù hợp nhất hiện trước, kèm dự án và version (hình đầu trang). Bấm là mở.</p>
     </div>
     <div class="shot">
-      <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_help_dark_en.png"><img src="media/panel_help_light_en.png" width="503" height="700" loading="lazy" alt="The Find box with its Help note: drag an image or PSD onto the box, or click it to pick a file"></picture>
-      <picture lang="vi"><source media="(prefers-color-scheme: dark)" srcset="media/panel_help_dark_vi.png"><img src="media/panel_help_light_vi.png" width="503" height="700" loading="lazy" alt="Ô Tìm kèm khung giải thích: kéo ảnh hoặc PSD vào ô, hoặc bấm vào ô để chọn file"></picture>
+      <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_find_demo_dark_en.webp"><img src="media/panel_find_demo_light_en.webp" width="503" height="840" loading="lazy" alt="The Find box: an image is dragged in and FindID lists the matching PSD"></picture>
+      <picture lang="vi"><source media="(prefers-color-scheme: dark)" srcset="media/panel_find_demo_dark_vi.webp"><img src="media/panel_find_demo_light_vi.webp" width="503" height="840" loading="lazy" alt="Ô Tìm: kéo một ảnh vào và FindID hiện PSD khớp"></picture>
     </div>
   </div>
   <div class="feature">
@@ -145,6 +127,28 @@
   </ul>
 </div></section>
 
+
+<section class="block" id="comments"><div class="wrap">
+  <h2 class="head2" lang="en">Leave a comment</h2><h2 class="head2" lang="vi">Để lại bình luận</h2>
+  <a class="btn yt" href="" target="_blank" rel="noopener"><span lang="en">Comment on YouTube</span><span lang="vi">Bình luận trên YouTube</span></a>
+  <div class="cbox" id="cbox" hidden>
+    <div class="c-out">
+      <button type="button" class="btn c-in"><span lang="en">Sign in with Google to comment</span><span lang="vi">Đăng nhập Google để bình luận</span></button>
+      <p class="fine" lang="en">Your comment shows here with your Google name and picture.</p>
+      <p class="fine" lang="vi">Bình luận hiện ở đây kèm tên và ảnh Google của bạn.</p>
+    </div>
+    <div class="c-form" hidden>
+      <label for="c-text"><span lang="en">Your comment</span><span lang="vi">Bình luận của bạn</span></label>
+      <textarea id="c-text" rows="4" maxlength="1000"></textarea>
+      <div class="c-row"><span class="c-count fine">0/1000</span><span class="c-me fine"></span><button type="button" class="c-signout"><span lang="en">Sign out</span><span lang="vi">Đăng xuất</span></button><button type="button" class="btn c-post"><span lang="en">Post</span><span lang="vi">Gửi</span></button></div>
+    </div>
+    <p class="c-err" role="alert" hidden></p>
+    <ol class="c-list" aria-busy="true"><li class="c-skel"></li><li class="c-skel"></li><li class="c-skel"></li></ol>
+    <button type="button" class="btn ghost c-more" hidden><span lang="en">Show more</span><span lang="vi">Xem thêm</span></button>
+  </div>
+  <p class="intro" lang="en">Or write to us: <a href="mailto:support@findid.app">support@findid.app</a></p>
+  <p class="intro" lang="vi">Hoặc gửi cho chúng mình: <a href="mailto:support@findid.app">support@findid.app</a></p>
+</div></section>
 
 <section class="block" id="availability"><div class="wrap"><div class="card getcard">
   <div>

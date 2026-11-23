@@ -154,6 +154,35 @@ ol.steps li::before { content: "0" counter(s); font: var(--fs-cap)/1.9 var(--mon
 .getbuy .per, .plan .per { color: var(--muted); margin: var(--s2) 0 var(--s5); font-size: var(--fs-body); }
 .getbuy .alt { display: block; margin-top: var(--s3); font-size: var(--fs-sm); }
 
+/* comments (index #comments, 2026-11-23): the YouTube button shows only when its href is set; the email line under it */
+#comments .yt { margin: 0 0 var(--s4); }
+#comments .yt[href=""] { display: none; }
+#comments .intro { margin-bottom: 0; }
+/* comment box (comments.js, job 20261123_site_comments_google.md): sign-in / form, then the list newest first; skeleton rows hold the space while it loads */
+#comments .cbox { max-width: 720px; margin: 0 0 var(--s5); }
+#comments .c-out .fine { margin-top: var(--s2); }
+#comments .c-form label { display: block; font-size: var(--fs-sm); color: var(--muted); margin-bottom: var(--s1); }
+#comments textarea {
+  display: block; width: 100%; min-height: 104px; resize: vertical; padding: var(--s3); border: 1px solid var(--line); border-radius: 10px;
+  background: var(--raised); color: var(--text); font: var(--fs-body)/var(--lh-body) var(--sans);
+}
+#comments textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+#comments .c-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s2) var(--s3); margin-top: var(--s2); }
+#comments .c-me { margin-left: auto; }
+#comments .c-signout { background: none; border: 0; padding: 0; color: var(--accent); font: var(--fs-sm)/var(--lh-body) var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+#comments .c-err { margin: var(--s3) 0 0; font-size: var(--fs-sm); background: var(--mark); color: var(--mark-text); padding: var(--s1) var(--s2); border-radius: 6px; }
+#comments .c-list { list-style: none; margin: var(--s5) 0 0; padding: 0; }
+#comments .c-item, #comments .c-skel { border-top: 1px solid var(--line); padding: var(--s4) 0; }
+#comments .c-skel { height: 96px; background: linear-gradient(var(--surface), var(--surface)) 0 var(--s4) / 40% 16px no-repeat, linear-gradient(var(--surface), var(--surface)) 0 48px / 90% 16px no-repeat; }
+#comments .c-head { display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-sm); }
+#comments .c-head img, #comments .c-ini { width: 28px; height: 28px; border-radius: 50%; flex: none; }
+#comments .c-ini { display: inline-flex; align-items: center; justify-content: center; background: var(--surface); color: var(--muted); }
+#comments .c-head time { color: var(--muted); }
+#comments .c-del { margin-left: auto; background: none; border: 1px solid var(--line); border-radius: 6px; padding: 2px var(--s2); color: var(--muted); font: var(--fs-cap)/1.4 var(--sans); cursor: pointer; }
+#comments .c-item p { margin: var(--s2) 0 0; white-space: pre-wrap; }
+#comments .c-none { margin-top: var(--s3); }
+#comments .c-more { margin-top: var(--s4); }
+
 /* FAQ */
 .faq { display: grid; grid-template-columns: 300px 1fr; gap: var(--s5) var(--s8); }
 .faq h2 { margin: 0; }
