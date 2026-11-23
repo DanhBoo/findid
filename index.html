@@ -17,7 +17,7 @@
   <a class="brand" href="index.html"><img class="logo-l" src="media/logo.svg" height="24" alt=""><img class="logo-d" src="media/logo_dark.svg" height="24" alt="">FindID</a>
   <nav class="menu">
     <a class="m-hide" href="#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
-    <a class="m-hide" href="#how"><span lang="en">How Find works</span><span lang="vi">Cách Tìm hoạt động</span></a>
+    <a class="m-hide" href="#how"><span lang="en">How FindID works</span><span lang="vi">FindID hoạt động thế nào</span></a>
     <a class="m-hide" href="#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
     <a href="pricing.html"><span lang="en">Pricing</span><span lang="vi">Giá</span></a>
     <a class="m-hide" href="#support"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
@@ -75,10 +75,30 @@
   </div>
 </div></section>
 
-<section class="block" id="works"><div class="wrap">
-  <h2 lang="en">How FindID works</h2><h2 lang="vi">FindID hoạt động thế nào</h2>
-  <p class="lead" lang="en">Photoshop keeps a small block of information inside each file, in a standard called <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID writes an ID there. When you Save As, Save a Copy or Save for Web to a JPG or PNG, the new file keeps the ID of the PSD it came from. FindID reads these IDs quickly in every folder you choose, so a PSD and the images made from it are grouped together even when they sit in different folders. Images without an ID (Export As, Quick Export, screenshots) are matched by their pixels instead.</p>
-  <p class="lead" lang="vi">Photoshop lưu một phần thông tin nhỏ bên trong mỗi file, theo chuẩn <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID ghi một mã ID vào đó. Khi bạn Save As, Save a Copy hay Save for Web ra JPG, PNG, file mới giữ mã của PSD gốc. FindID đọc nhanh các mã này trong mọi thư mục bạn chọn, nên PSD và các ảnh xuất ra từ nó được xếp chung dù nằm ở thư mục khác nhau. Ảnh không có mã (Export As, Quick Export, ảnh chụp màn hình) thì được so bằng điểm ảnh.</p>
+<section class="block" id="how"><div class="wrap how">
+  <div>
+    <h2 class="head2" lang="en">How FindID works</h2><h2 class="head2" lang="vi">FindID hoạt động thế nào</h2>
+    <ol class="steps" lang="en">
+      <li><span>When you save a version, FindID writes a small ID into the file info (<a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>, a standard Photoshop keeps inside each file). Layers and pixels are not touched.</span></li>
+      <li><span>Images you save from that version with Save a Copy, Save As or Save for Web carry the same ID, so FindID keeps them with their PSD even when they sit in different folders. Export As and Quick Export do not.</span></li>
+      <li><span>In Settings, add the folders that hold your files. In the Find tab, click Scan IDs once.</span></li>
+      <li><span>Drop an image on the Find box. With an ID, its PSD shows up straight away. Without one (a cropped or resized picture), FindID compares it with small previews of your PSDs and shows the closest.</span></li>
+    </ol>
+    <ol class="steps" lang="vi">
+      <li><span>Khi bạn lưu một version, FindID ghi một ID nhỏ vào phần thông tin file (<a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>, chuẩn Photoshop lưu bên trong mỗi file). Layer và điểm ảnh không bị đụng tới.</span></li>
+      <li><span>Ảnh lưu từ version đó bằng Save a Copy, Save As hay Save for Web mang cùng ID, nên FindID xếp chúng chung với PSD gốc dù nằm ở thư mục khác nhau. Export As và Quick Export thì không.</span></li>
+      <li><span>Trong Cài đặt, thêm các thư mục chứa file. Trong tab Tìm, bấm Quét ID một lần.</span></li>
+      <li><span>Thả ảnh vào ô Tìm. Ảnh có ID thì PSD hiện ngay. Ảnh không có ID (đã cắt hay đổi cỡ) thì FindID so với ảnh xem trước nhỏ của các PSD và hiện file giống nhất.</span></li>
+    </ol>
+    <p class="note" lang="en">All of this runs on your computer. FindID uploads nothing.</p>
+    <p class="note" lang="vi">Tất cả chạy trên máy bạn. FindID không tải gì lên mạng.</p>
+  </div>
+  <div class="shot">
+    <img lang="en" src="media/find_from_image_en.gif" width="480" height="218" loading="lazy" alt="Moving picture: drag an image onto the Find box">
+    <img lang="vi" src="media/find_from_image_vi.gif" width="480" height="218" loading="lazy" alt="Hình động: kéo ảnh vào ô Tìm">
+    <p class="caption" lang="en">The same moving picture plays in the panel's Help box.</p>
+    <p class="caption" lang="vi">Hình động này cũng chạy trong khung giải thích của panel.</p>
+  </div>
 </div></section>
 <section class="block" id="features"><div class="wrap">
   <div class="feature">
@@ -125,31 +145,6 @@
   </ul>
 </div></section>
 
-<section class="block" id="how"><div class="wrap how">
-  <div>
-    <h2 class="head2" lang="en">How Find works</h2><h2 class="head2" lang="vi">Cách Tìm hoạt động</h2>
-    <ol class="steps" lang="en">
-      <li><span>When you save a version, FindID writes a small ID into the file info (XMP). Layers and pixels are not touched.</span></li>
-      <li><span>Images you save from that version with Save a Copy, Save As or Save for Web carry the same ID. Export As and Quick Export do not.</span></li>
-      <li><span>In Settings, add the folders that hold your files. In the Find tab, click Scan IDs once.</span></li>
-      <li><span>Drop an image on the Find box. With an ID, its PSD shows up straight away. Without one (a cropped or resized picture), FindID compares it with small previews of your PSDs and shows the closest.</span></li>
-    </ol>
-    <ol class="steps" lang="vi">
-      <li><span>Khi bạn lưu một version, FindID ghi một ID nhỏ vào phần thông tin file (XMP). Layer và điểm ảnh không bị đụng tới.</span></li>
-      <li><span>Ảnh lưu từ version đó bằng Save a Copy, Save As hay Save for Web mang cùng ID. Export As và Quick Export thì không.</span></li>
-      <li><span>Trong Cài đặt, thêm các thư mục chứa file. Trong tab Tìm, bấm Quét ID một lần.</span></li>
-      <li><span>Thả ảnh vào ô Tìm. Ảnh có ID thì PSD hiện ngay. Ảnh không có ID (đã cắt hay đổi cỡ) thì FindID so với ảnh xem trước nhỏ của các PSD và hiện file giống nhất.</span></li>
-    </ol>
-    <p class="note" lang="en">All of this runs on your computer. FindID uploads nothing.</p>
-    <p class="note" lang="vi">Tất cả chạy trên máy bạn. FindID không tải gì lên mạng.</p>
-  </div>
-  <div class="shot">
-    <img lang="en" src="media/find_from_image_en.gif" width="480" height="218" loading="lazy" alt="Moving picture: drag an image onto the Find box; the source PSD shows up with its project and version">
-    <img lang="vi" src="media/find_from_image_vi.gif" width="480" height="218" loading="lazy" alt="Hình động: kéo ảnh vào ô Tìm; file PSD gốc hiện ra kèm dự án và version">
-    <p class="caption" lang="en">The same moving picture plays in the panel's Help box.</p>
-    <p class="caption" lang="vi">Hình động này cũng chạy trong khung giải thích của panel.</p>
-  </div>
-</div></section>
 
 <section class="block" id="availability"><div class="wrap"><div class="card getcard">
   <div>
