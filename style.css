@@ -177,10 +177,27 @@ ol.steps li::before { content: "0" counter(s); font: var(--fs-cap)/1.9 var(--mon
 #comments .c-head img, #comments .c-ini { width: 28px; height: 28px; border-radius: 50%; flex: none; }
 #comments .c-ini { display: inline-flex; align-items: center; justify-content: center; background: var(--surface); color: var(--muted); }
 #comments .c-head time { color: var(--muted); }
-#comments .c-del { margin-left: auto; background: none; border: 1px solid var(--line); border-radius: 6px; padding: 2px var(--s2); color: var(--muted); font: var(--fs-cap)/1.4 var(--sans); cursor: pointer; }
 #comments .c-item p { margin: var(--s2) 0 0; white-space: pre-wrap; }
 #comments .c-none { margin-top: var(--s3); }
 #comments .c-more { margin-top: var(--s4); }
+/* reply / edit / delete / edit history (job 20261123_comments_edit_delete_reply.md): text buttons under each comment, replies indented one level */
+#comments .c-acts { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s4); margin-top: var(--s2); }
+#comments .c-acts button, #comments .c-edited, #comments .c-cancel { background: none; border: 0; padding: 0; color: var(--muted); font: var(--fs-sm)/var(--lh-body) var(--sans); cursor: pointer; }
+#comments .c-acts button:hover, #comments .c-edited:hover, #comments .c-cancel:hover, #comments .c-edited[aria-expanded="true"] { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+#comments .c-cancel { margin-left: auto; }
+#comments .c-replies { list-style: none; margin: var(--s3) 0 0; padding: 0 0 0 var(--s4); border-left: 2px solid var(--line); }
+#comments .c-replies:empty { display: none; }
+#comments .c-replies .c-item { padding: var(--s3) 0; }
+#comments .c-replies .c-item:first-child { border-top: 0; padding-top: 0; }
+#comments .c-rform, #comments .c-ebox { margin-top: var(--s3); }
+#comments .c-rform textarea, #comments .c-ebox textarea { min-height: 80px; }
+#comments .c-item p.c-gone { color: var(--muted); font-style: italic; margin: 0; }
+#comments .c-hist { margin-top: var(--s3); padding: var(--s2) var(--s3); background: var(--surface); border-radius: 6px; font-size: var(--fs-sm); }
+#comments .c-item .c-hist-h { margin: 0; color: var(--muted); font-weight: var(--fw-semi); }
+#comments .c-hist ol { list-style: none; margin: 0; padding: 0; }
+#comments .c-hist li { border-top: 1px solid var(--line); padding: var(--s2) 0 0; margin-top: var(--s2); }
+#comments .c-hist time { color: var(--muted); }
+#comments .c-item .c-hist p { margin: var(--s1) 0 0; }
 
 /* FAQ */
 .faq { display: grid; grid-template-columns: 300px 1fr; gap: var(--s5) var(--s8); }
