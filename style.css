@@ -192,7 +192,11 @@ footer.bottom p { margin: 0 0 var(--s1); max-width: 60em; font-size: var(--fs-ca
 html.tabbed .pane:not(.on) { display: none; }
 .dlmain .btn.big { min-width: 340px; }
 .dlmain .plat { font-size: var(--fs-sm); color: var(--muted); margin: var(--s3) 0 0; }
-.dlmain .price { margin: var(--s1) 0 0; }
+.dlmain .pricebox { margin: 0 0 var(--s5); }
+.dlmain .pricerow { display: flex; align-items: baseline; gap: var(--s3); margin: 0; white-space: nowrap; }
+.dlmain .pricerow .amt { font-size: var(--fs-h2); line-height: var(--lh-h2); font-weight: var(--fw-semi); letter-spacing: -0.02em; color: var(--text); }
+.dlmain .pricerow .qual { font-size: var(--fs-sm); color: var(--muted); }
+.dlmain .paynote { font-size: var(--fs-sm); color: var(--muted); margin: var(--s1) 0 0; }
 .dlmain .cc { font-size: var(--fs-sm); color: var(--muted); margin: var(--s4) 0 0; }
 .dlmain .terms { font-size: var(--fs-cap); color: var(--muted); margin: var(--s5) 0 0; max-width: 34em; }
 .dlmain .pane + .pane { margin-top: var(--s6); }
