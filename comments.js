@@ -1,6 +1,7 @@
 // FindID site comments (index.html #comments, job 20261123_site_comments_google.md): sign in with Google, post, list newest first.
 // Data + rules: site/firebase/firestore.rules (Firebase project on the free Spark plan). Text is always set with textContent, never as HTML.
-// Firebase scripts load from www.gstatic.com only when the section comes near the screen (or right away after a sign-in redirect).
+// Firebase scripts load from www.gstatic.com only when the section comes near the screen (or right away after a sign-in redirect);
+// Google's One Tap script (accounts.google.com/gsi/client) only after a click on the sign-in button.
 // Until FIREBASE.apiKey is filled in, the box stays hidden and the section shows only the heading and the email line.
 (function () {
   var FIREBASE = { apiKey: 'AIzaSyCER1doZ8KPsv4c1FxM8679aK_VhYFrg3o', authDomain: 'findid-comments.firebaseapp.com', projectId: 'findid-comments', appId: '1:363627540068:web:e0fe99c60ceaf67da0b971' }; // web app config from Firebase console > Project settings (public by design; access is set by firestore.rules)
@@ -8,7 +9,7 @@
   var NOTIFY_URL = 'https://script.google.com/macros/s/AKfycbxr9AbzGknv6QrkjXBdf4V-nCrVOTqSjW3KclBIt5FZQirB7ZroH2Q9xDZbs7QE-i0zQQ/exec'; // Apps Script web app "FindID comment notice" (site/firebase/notify_apps_script.gs); '' = no mail notice
   var SDK = 'https://www.gstatic.com/firebasejs/13.2.0/';
   // Google One Tap (user 2026-11-23): Web client that Firebase made for the Google provider; its Authorized JavaScript origins must list the site.
-  // gsi/client loads at the same trigger as the SDK, only for a signed-out visitor, and prompts once per page view.
+  // gsi/client loads only when the visitor clicks the sign-in button (signIn below).
   // origins set 2026-11-23 in Google Cloud console > Google Auth Platform > Clients: findid.app, www.findid.app, localhost, localhost:8765; '' = One Tap off
   var ONE_TAP_CLIENT = '363627540068-4fb369hnkj7v0nt1304vgkca5jg9bs4e.apps.googleusercontent.com';
   var PAGE = 20, MAX = 1000, GAP_MS = 30000;
@@ -20,13 +21,14 @@
     post: ['Could not post. Try again.', 'Không gửi được. Thử lại.'],
     del: ['Could not delete. Try again.', 'Không xoá được. Thử lại.'],
     ask: ['Delete this comment?', 'Xoá bình luận này?'],
-    none: ['No comments yet.', 'Chưa có bình luận nào.']
+    none: ['No comments yet.', 'Chưa có bình luận nào.'],
+    ph: ['Write a comment…', 'Viết bình luận…']
   };
   var box = document.getElementById('cbox');
   if (!box || !FIREBASE.apiKey) return;
   box.hidden = false;
   var q = function (s) { return box.querySelector(s); };
-  var list = q('.c-list'), more = q('.c-more'), err = q('.c-err'), out = q('.c-out'), form = q('.c-form');
+  var list = q('.c-list'), more = q('.c-more'), err = q('.c-err'), need = q('.c-need');
   var ta = q('textarea'), count = q('.c-count'), postBtn = q('.c-post');
   var fb = null, user = null, claims = null, last = null, lastPost = 0, started = false;
 
@@ -86,46 +88,74 @@
   function relist() { last = null; list.textContent = ''; return page(); } // after sign-in / out: Delete buttons follow the account
 
   function show() {
-    out.hidden = !!user; form.hidden = !user;
-    q('.c-me').textContent = user ? (user.displayName || '') : '';
+    var me = q('.c-me');
+    me.textContent = user ? (user.displayName || '') : '';
+    me.hidden = !user; q('.c-signout').hidden = !user;
+    if (user) need.hidden = true;
   }
+  function placeholder() { ta.placeholder = S.ph[vi()]; ta.setAttribute('aria-label', S.ph[vi()]); }
+
+  // Sign-in on click only (user 2026-11-23: the "Continue as" box shows after clicking, not on page open). One Tap first (FedCM
+  // "Continue as ..."); if Google does not show it, or the visitor closes it, the Firebase popup opens instead (redirect if the popup is
+  // blocked). The popup starts only after One Tap has ended, so one click shows one account chooser at a time.
+  var gsi = null, tapOff = !ONE_TAP_CLIENT, signing = false, pendingPost = false;
   function signIn() {
-    say(null);
+    if (user || signing || !fb) return;
+    signing = true; need.hidden = true; say(null);
+    if (tapOff) return popup();
+    loadGsi(function (id) {
+      if (!id || user) { if (!user) popup(); else signing = false; return; }
+      id.prompt(function (n) {
+        var dismissed = n.isDismissedMoment && n.isDismissedMoment();
+        if (dismissed && n.getDismissedReason() === 'credential_returned') return; // signed in by One Tap
+        if (dismissed || (n.isSkippedMoment && n.isSkippedMoment())) { // FedCM reports a prompt that was not shown as skipped
+          tapOff = true; // later clicks in this page view go straight to the popup
+          if (!user) popup();
+        }
+      });
+    });
+  }
+  function loadGsi(done) {
+    if (gsi) return done(gsi);
+    var s = document.createElement('script');
+    s.src = 'https://accounts.google.com/gsi/client'; s.async = true;
+    s.onerror = function () { tapOff = true; done(null); };
+    s.onload = function () {
+      gsi = window.google && google.accounts && google.accounts.id;
+      if (!gsi) { tapOff = true; return done(null); }
+      gsi.initialize({
+        client_id: ONE_TAP_CLIENT, auto_select: false, cancel_on_tap_outside: true, context: 'signin', itp_support: true, use_fedcm_for_prompt: true,
+        callback: function (r) {
+          fb.auth.signInWithCredential(fb.au, fb.auth.GoogleAuthProvider.credential(r.credential)).catch(function () { say(S.signin); failed(); });
+        }
+      });
+      done(gsi);
+    };
+    document.head.appendChild(s);
+  }
+  function popup() {
     var a = fb.auth, p = new a.GoogleAuthProvider();
     a.signInWithPopup(fb.au, p).catch(function (e) {
       var c = e && e.code || '';
       if (c === 'auth/popup-blocked' || c === 'auth/operation-not-supported-in-this-environment') {
-        try { sessionStorage.setItem('findid.c.redirect', '1'); } catch (x) { /* redirect still works, the SDK just loads on scroll */ }
+        try { // the page reloads: keep the typed text and a pending Post for the way back
+          sessionStorage.setItem('findid.c.redirect', '1');
+          sessionStorage.setItem('findid.c.draft', JSON.stringify({ text: ta.value, post: pendingPost }));
+        } catch (x) { /* storage blocked: redirect still works, the text is lost */ }
         return a.signInWithRedirect(fb.au, p);
       }
       if (c !== 'auth/popup-closed-by-user' && c !== 'auth/cancelled-popup-request') say(S.signin);
+      failed();
     });
   }
-  var tapped = false;
-  function oneTap() {
-    if (tapped || !ONE_TAP_CLIENT) return;
-    tapped = true; // once per page view: a closed prompt is not shown again (Google also applies its own cooldown)
-    var s = document.createElement('script');
-    s.src = 'https://accounts.google.com/gsi/client'; s.async = true;
-    s.onload = function () {
-      var id = window.google && google.accounts && google.accounts.id;
-      if (!id || user) return;
-      id.initialize({
-        client_id: ONE_TAP_CLIENT, auto_select: false, cancel_on_tap_outside: true, context: 'signin', itp_support: true, use_fedcm_for_prompt: true,
-        callback: function (r) {
-          fb.auth.signInWithCredential(fb.au, fb.auth.GoogleAuthProvider.credential(r.credential)).catch(function () { say(S.signin); });
-        }
-      });
-      id.prompt();
-    };
-    document.head.appendChild(s);
-  }
+  function failed() { signing = false; pendingPost = false; if (!user) need.hidden = false; } // every sign-in UI closed: the next click in the box tries again
   function count1() { count.textContent = ta.value.trim().length + '/' + MAX; }
   function post() {
     var text = ta.value.trim();
     say(null);
     if (!text || text.length > MAX) return say(S.empty);
     if (Date.now() - lastPost < GAP_MS) return say(S.wait);
+    if (!user) { pendingPost = true; return signIn(); } // posts by itself once sign-in succeeds
     var f = fb.fs, ref = f.doc(f.collection(fb.db, 'comments')), b = f.writeBatch(fb.db);
     var d = { uid: user.uid, name: claims.name || '', photo: claims.picture || '', text: text, created: f.serverTimestamp(), lang: vi() ? 'vi' : 'en' };
     b.set(ref, d);
@@ -151,24 +181,34 @@
       var app = m[0].initializeApp(FIREBASE);
       fb = { auth: m[1], fs: m[2], au: m[1].getAuth(app), db: m[2].getFirestore(app) };
       m[1].getRedirectResult(fb.au).catch(function () { say(S.signin); });
-      try { sessionStorage.removeItem('findid.c.redirect'); } catch (x) { /* nothing stored */ }
+      var draft = null;
+      try {
+        draft = JSON.parse(sessionStorage.getItem('findid.c.draft') || 'null');
+        sessionStorage.removeItem('findid.c.redirect'); sessionStorage.removeItem('findid.c.draft');
+      } catch (x) { /* nothing stored */ }
+      if (draft) { ta.value = draft.text || ''; count1(); signing = true; pendingPost = !!draft.post; } // back from a sign-in redirect
       var first = true;
       m[1].onAuthStateChanged(fb.au, function (u) {
         user = u; claims = null; show();
-        if (first && !u) oneTap();
-        if (u && window.google && google.accounts && google.accounts.id) google.accounts.id.cancel(); // signed in by the button: close One Tap
         var ready = u ? u.getIdTokenResult().then(function (t) { claims = t.claims; }) : Promise.resolve();
-        ready.then(function () { if (first) { first = false; page(); } else relist(); });
+        ready.then(function () {
+          var wasFirst = first;
+          if (first) { first = false; page(); } else relist();
+          if (u && signing) { signing = false; ta.focus(); if (pendingPost) { pendingPost = false; post(); } }
+          else if (!u && signing && wasFirst && draft) failed(); // came back from the redirect without signing in
+        });
       });
     }).catch(function () { list.removeAttribute('aria-busy'); list.textContent = ''; say(S.load); });
   }
 
-  q('.c-in').addEventListener('click', signIn);
+  ta.addEventListener('focus', signIn); // signed out: a click in the box starts Google sign-in; typed text stays
+  ta.addEventListener('click', signIn);
   q('.c-signout').addEventListener('click', function () { if (fb) fb.auth.signOut(fb.au); });
   postBtn.addEventListener('click', post);
   ta.addEventListener('input', count1);
   more.addEventListener('click', page);
-  count1();
+  count1(); placeholder();
+  new MutationObserver(placeholder).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
   var redirected = false;
   try { redirected = sessionStorage.getItem('findid.c.redirect') === '1'; } catch (x) { /* treat as no redirect */ }
   if (redirected || !('IntersectionObserver' in window)) return start();

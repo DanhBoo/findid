@@ -160,8 +160,7 @@ ol.steps li::before { content: "0" counter(s); font: var(--fs-cap)/1.9 var(--mon
 #comments .intro { margin-bottom: 0; }
 /* comment box (comments.js, job 20261123_site_comments_google.md): sign-in / form, then the list newest first; skeleton rows hold the space while it loads */
 #comments .cbox { max-width: 720px; margin: 0 0 var(--s5); }
-#comments .c-out .fine { margin-top: var(--s2); }
-#comments .c-form label { display: block; font-size: var(--fs-sm); color: var(--muted); margin-bottom: var(--s1); }
+#comments .c-need, #comments .c-hint { margin: var(--s2) 0 0; }
 #comments textarea {
   display: block; width: 100%; min-height: 104px; resize: vertical; padding: var(--s3); border: 1px solid var(--line); border-radius: 10px;
   background: var(--raised); color: var(--text); font: var(--fs-body)/var(--lh-body) var(--sans);
