@@ -79,16 +79,16 @@
 
 <section class="block" id="how"><div class="wrap">
   <h2 lang="en">How FindID works</h2><h2 lang="vi">FindID hoạt động thế nào</h2>
-  <p class="lead" lang="en">Photoshop keeps a small block of information inside each file, in a standard called <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID writes an ID there. When you Save As, Save a Copy or Save for Web to a JPG or PNG, the new file keeps the ID of the PSD it came from. FindID reads these IDs quickly in every folder you choose, so a PSD and the images made from it are grouped together even when they sit in different folders. Images without an ID (Export As, Quick Export, screenshots) are matched by their pixels instead.</p>
-  <p class="lead" lang="vi">Photoshop lưu một phần thông tin nhỏ bên trong mỗi file, theo chuẩn <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID ghi một mã ID vào đó. Khi bạn Save As, Save a Copy hay Save for Web ra JPG, PNG, file mới giữ mã của PSD gốc. FindID đọc nhanh các mã này trong mọi thư mục bạn chọn, nên PSD và các ảnh xuất ra từ nó được xếp chung dù nằm ở thư mục khác nhau. Ảnh không có mã (Export As, Quick Export, ảnh chụp màn hình) thì được so bằng điểm ảnh.</p>
+  <p class="lead" lang="en">Photoshop keeps a small block of information inside each file, in a standard called <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID writes an ID there. When you Save As, Save a Copy or Save for Web to a JPG or PNG, the new file keeps the ID of the PSD it came from. FindID reads these IDs quickly across your computer (folders you choose in Settings), so a PSD and the images made from it are easy to manage and sort in FindID, whatever folder they sit in and whatever they are named. Images without an ID (Export As, Quick Export, screenshots) are matched by their pixels instead.</p>
+  <p class="lead" lang="vi">Photoshop lưu một phần thông tin nhỏ bên trong mỗi file, theo chuẩn <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a>. FindID ghi một mã ID vào đó. Khi bạn Save As, Save a Copy hay Save for Web ra JPG, PNG, file mới giữ mã của PSD gốc. FindID đọc nhanh các mã này trong máy tính (thư mục tuỳ chỉnh trong Cài đặt), nên PSD và các ảnh xuất ra từ nó dễ dàng được quản lý và sắp xếp trong FindID, dù nằm ở thư mục khác nhau hay có tên khác nhau. Ảnh không có mã (Export As, Quick Export, ảnh chụp màn hình) thì được so bằng điểm ảnh.</p>
 </div></section>
 <section class="block" id="features"><div class="wrap">
   <div class="feature">
     <div class="txt">
       <p class="num">01</p>
       <h3 lang="en">Find the source PSD from an image</h3><h3 lang="vi">Tìm PSD gốc từ ảnh</h3>
-      <p lang="en">Drop an exported image or a PSD on the Find box. Best matches come first, each with its project and version (picture at the top of this page). Click to open it.</p>
-      <p lang="vi">Thả ảnh đã xuất hoặc một PSD vào ô Tìm. Kết quả phù hợp nhất hiện trước, kèm dự án và version (hình đầu trang). Bấm là mở.</p>
+      <p lang="en">Drop an exported image or a PSD on the Find box. Best matches come first, each with its project and version.</p>
+      <p lang="vi">Thả ảnh đã xuất hoặc một PSD vào ô Tìm. Kết quả phù hợp nhất hiện trước, kèm dự án và version.</p>
     </div>
     <div class="shot">
       <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_find_demo_dark_en.webp"><img src="media/panel_find_demo_light_en.webp" width="503" height="840" loading="lazy" alt="The Find box: an image is dragged in and FindID lists the matching PSD"></picture>
@@ -99,8 +99,8 @@
     <div class="txt">
       <p class="num">02</p>
       <h3 lang="en">Every version in the right project</h3><h3 lang="vi">Version nào cũng đúng dự án</h3>
-      <p lang="en">Save As a new name for each version and it lands on top of its project, with a thumbnail. Rename, move or copy the PSD and it still knows where it belongs.</p>
-      <p lang="vi">Mỗi version mới thì Save As tên mới, version tự nằm trên cùng dự án, kèm ảnh nhỏ. Đổi tên, dời hay chép PSD thì file vẫn biết mình thuộc dự án nào.</p>
+      <p lang="en">Each new version lands on top of its project, with a thumbnail, thanks to the FindID ID written into the file's <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a> info. Rename, move or copy the PSD and it still knows where it belongs.</p>
+      <p lang="vi">Mỗi version mới tự nằm trên cùng dự án, kèm ảnh nhỏ, nhờ mã ID FindID ghi vào thông tin <a href="https://developer.adobe.com/xmp/docs/" target="_blank" rel="noopener">XMP</a> của file. Đổi tên, dời hay chép PSD thì file vẫn biết mình thuộc dự án nào.</p>
     </div>
     <div class="shot">
       <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_projects_dark_en.png"><img src="media/panel_projects_light_en.png" width="503" height="840" loading="lazy" alt="Projects tab: five projects, each with its versions and thumbnails"></picture>
@@ -110,9 +110,33 @@
   <div class="feature">
     <div class="txt">
       <p class="num">03</p>
+      <h3 lang="en">Fast scanning and finding</h3><h3 lang="vi">Quét và tìm tốc độ cao</h3>
+      <p lang="en">FindID scans the folders you choose in Settings only once at the start: it reads each file's ID and keeps a small preview, about 7–17 seconds per 1,000 files on our test computer, depending on the disk. After that it reads only new or changed files, done in a few seconds, and you can find by PSD or image (JPG, PNG, GIF…) right away.</p>
+      <p lang="vi">FindID chỉ cần quét một lần đầu các thư mục bạn chọn trong Cài đặt: đọc mã ID và lưu ảnh nhỏ của từng file, khoảng 7–17 giây cho mỗi 1.000 file trên máy thử, tuỳ ổ đĩa. Từ lần sau chỉ đọc file mới hoặc đã đổi, xong trong vài giây, rồi tìm theo PSD hay ảnh (JPG, PNG, GIF…) ngay.</p>
+    </div>
+    <div class="shot">
+      <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_scan_dark_en.png"><img src="media/panel_scan_light_en.png" width="503" height="466" loading="lazy" alt="Find tab right after a rescan: the status line shows how many files were scanned"></picture>
+      <picture lang="vi"><source media="(prefers-color-scheme: dark)" srcset="media/panel_scan_dark_vi.png"><img src="media/panel_scan_light_vi.png" width="503" height="466" loading="lazy" alt="Tab Tìm ngay sau khi quét lại: dòng trạng thái ghi số file đã quét"></picture>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="txt">
+      <p class="num">04</p>
+      <h3 lang="en">Find by pixels</h3><h3 lang="vi">Tìm bằng điểm ảnh</h3>
+      <p lang="en">Images that lost their ID are still found: FindID compares pixels with the small previews saved during the scan, so your computer stays light. A crop keeping only 20% of the picture still finds its source PSD in most tries (36/40 for a centre crop, 33/40 for a corner crop, on our test art).</p>
+      <p lang="vi">Ảnh mất mã ID vẫn tìm được: FindID so điểm ảnh với ảnh nhỏ đã lưu khi quét, nên máy vẫn nhẹ. Ảnh cắt chỉ còn 20% hình vẫn tìm ra PSD gốc trong hầu hết lần thử (36/40 khi cắt giữa, 33/40 khi cắt góc, trên bộ tranh thử).</p>
+    </div>
+    <div class="shot">
+      <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_crop_dark_en.png"><img src="media/panel_crop_light_en.png" width="503" height="840" loading="lazy" alt="Find tab: a small crop of a picture is dropped and its source PSD is the best match"></picture>
+      <picture lang="vi"><source media="(prefers-color-scheme: dark)" srcset="media/panel_crop_dark_vi.png"><img src="media/panel_crop_light_vi.png" width="503" height="840" loading="lazy" alt="Tab Tìm: thả một mẩu cắt nhỏ của tranh, PSD gốc hiện đầu Kết quả phù hợp nhất"></picture>
+    </div>
+  </div>
+  <div class="feature">
+    <div class="txt">
+      <p class="num">05</p>
       <h3 lang="en">Go back any step</h3><h3 lang="vi">Quay lại bước bất kỳ</h3>
-      <p lang="en">History lists every change to your projects. Click a step to go back to it, click a faded row to redo.</p>
-      <p lang="vi">Lịch sử ghi mọi thay đổi trong dự án. Bấm một bước để quay về, bấm dòng mờ để làm lại.</p>
+      <p lang="en">History records every change to your projects, so they are easy to manage. Click a step to go back to it.</p>
+      <p lang="vi">Lịch sử ghi mọi thay đổi trong dự án, dễ quản lý. Bấm một bước để quay về.</p>
     </div>
     <div class="shot">
       <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_history_dark_en.png"><img src="media/panel_history_light_en.png" width="503" height="330" loading="lazy" alt="History tab with the steps of two projects"></picture>
