@@ -65,6 +65,11 @@ header.top { border-bottom: 1px solid var(--line); }
 header.top .wrap { display: flex; align-items: center; gap: var(--s2) var(--s5); min-height: 64px; flex-wrap: wrap; }
 .brand { display: inline-flex; align-items: center; gap: var(--s2); font-weight: var(--fw-semi); font-size: var(--fs-lead); color: var(--text); text-decoration: none; margin-right: auto; }
 .brand img { height: 24px; width: auto; }
+/* logo (2026-11-23): blue mark on the light theme, light-blue mark on the dark theme (system dark with no stored choice, or the theme button) */
+.brand .logo-d { display: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand .logo-l { display: none; } :root:not([data-theme="light"]) .brand .logo-d { display: block; } }
+:root[data-theme="dark"] .brand .logo-l { display: none; }
+:root[data-theme="dark"] .brand .logo-d { display: block; }
 .menu { display: flex; gap: var(--s1) var(--s5); flex-wrap: wrap; font-size: var(--fs-sm); }
 .menu a { color: var(--muted); text-decoration: none; }
 .menu a:hover, .menu a[aria-current="page"] { color: var(--text); }
