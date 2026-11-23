@@ -3,10 +3,14 @@
 // Firebase scripts load from www.gstatic.com only when the section comes near the screen (or right away after a sign-in redirect).
 // Until FIREBASE.apiKey is filled in, the box stays hidden and the section shows only the heading and the email line.
 (function () {
-  var FIREBASE = { apiKey: '', authDomain: '', projectId: '', appId: '' }; // web app config from Firebase console > Project settings
+  var FIREBASE = { apiKey: 'AIzaSyCER1doZ8KPsv4c1FxM8679aK_VhYFrg3o', authDomain: 'findid-comments.firebaseapp.com', projectId: 'findid-comments', appId: '1:363627540068:web:e0fe99c60ceaf67da0b971' }; // web app config from Firebase console > Project settings (public by design; access is set by firestore.rules)
   var ADMIN_EMAIL = 'findidapp@gmail.com'; // sees Delete; the rules allow delete only for the admin uid
-  var NOTIFY_URL = ''; // Apps Script web app (site/firebase/notify_apps_script.gs); '' = no mail notice
+  var NOTIFY_URL = 'https://script.google.com/macros/s/AKfycbxr9AbzGknv6QrkjXBdf4V-nCrVOTqSjW3KclBIt5FZQirB7ZroH2Q9xDZbs7QE-i0zQQ/exec'; // Apps Script web app "FindID comment notice" (site/firebase/notify_apps_script.gs); '' = no mail notice
   var SDK = 'https://www.gstatic.com/firebasejs/13.2.0/';
+  // Google One Tap (user 2026-11-23): Web client that Firebase made for the Google provider; its Authorized JavaScript origins must list the site.
+  // gsi/client loads at the same trigger as the SDK, only for a signed-out visitor, and prompts once per page view.
+  // origins set 2026-11-23 in Google Cloud console > Google Auth Platform > Clients: findid.app, www.findid.app, localhost, localhost:8765; '' = One Tap off
+  var ONE_TAP_CLIENT = '363627540068-4fb369hnkj7v0nt1304vgkca5jg9bs4e.apps.googleusercontent.com';
   var PAGE = 20, MAX = 1000, GAP_MS = 30000;
   var S = { // draft strings, to be approved
     load: ['Could not load comments. Try again later.', 'Không tải được bình luận. Thử lại sau.'],
@@ -97,6 +101,25 @@
       if (c !== 'auth/popup-closed-by-user' && c !== 'auth/cancelled-popup-request') say(S.signin);
     });
   }
+  var tapped = false;
+  function oneTap() {
+    if (tapped || !ONE_TAP_CLIENT) return;
+    tapped = true; // once per page view: a closed prompt is not shown again (Google also applies its own cooldown)
+    var s = document.createElement('script');
+    s.src = 'https://accounts.google.com/gsi/client'; s.async = true;
+    s.onload = function () {
+      var id = window.google && google.accounts && google.accounts.id;
+      if (!id || user) return;
+      id.initialize({
+        client_id: ONE_TAP_CLIENT, auto_select: false, cancel_on_tap_outside: true, context: 'signin', itp_support: true, use_fedcm_for_prompt: true,
+        callback: function (r) {
+          fb.auth.signInWithCredential(fb.au, fb.auth.GoogleAuthProvider.credential(r.credential)).catch(function () { say(S.signin); });
+        }
+      });
+      id.prompt();
+    };
+    document.head.appendChild(s);
+  }
   function count1() { count.textContent = ta.value.trim().length + '/' + MAX; }
   function post() {
     var text = ta.value.trim();
@@ -132,6 +155,8 @@
       var first = true;
       m[1].onAuthStateChanged(fb.au, function (u) {
         user = u; claims = null; show();
+        if (first && !u) oneTap();
+        if (u && window.google && google.accounts && google.accounts.id) google.accounts.id.cancel(); // signed in by the button: close One Tap
         var ready = u ? u.getIdTokenResult().then(function (t) { claims = t.claims; }) : Promise.resolve();
         ready.then(function () { if (first) { first = false; page(); } else relist(); });
       });
