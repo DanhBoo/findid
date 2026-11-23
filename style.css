@@ -198,6 +198,16 @@ ol.steps li::before { content: "0" counter(s); font: var(--fs-cap)/1.9 var(--mon
 #comments .c-hist li { border-top: 1px solid var(--line); padding: var(--s2) 0 0; margin-top: var(--s2); }
 #comments .c-hist time { color: var(--muted); }
 #comments .c-item .c-hist p { margin: var(--s1) 0 0; }
+/* star ratings: average line on top, 5 star buttons in the top box (hover lights up to the pointer), stars next to a commenter's name */
+#comments .c-avg { margin: 0 0 var(--s3); min-height: calc(var(--fs-body) * var(--lh-body)); font-weight: var(--fw-semi); }
+#comments .c-rate { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s1) var(--s3); margin: 0 0 var(--s2); }
+#comments .c-starbox { display: inline-flex; }
+#comments .c-star { background: none; border: 0; padding: 0 2px; font: 24px/1 var(--sans); color: var(--line); cursor: pointer; }
+#comments .c-star.on, #comments .c-starbox:hover .c-star { color: var(--accent); }
+#comments .c-starbox:hover .c-star:hover ~ .c-star { color: var(--line); }
+#comments .c-star:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 4px; }
+#comments .c-unrate { background: none; border: 0; padding: 0; color: var(--muted); font: var(--fs-sm)/var(--lh-body) var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+#comments .c-stars { color: var(--accent); letter-spacing: 1px; }
 
 /* FAQ */
 .faq { display: grid; grid-template-columns: 300px 1fr; gap: var(--s5) var(--s8); }

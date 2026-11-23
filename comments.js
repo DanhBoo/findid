@@ -1,5 +1,8 @@
 // FindID site comments (index.html #comments, jobs 20261123_site_comments_google.md, 20261123_comments_edit_delete_reply.md): sign in with
 // Google, post, reply (one level), edit / delete your own comments, see a comment's edit history; list newest first, replies oldest first.
+// Star ratings: ratings/{uid} = {stars 1-5, at, name, photo}, one per Google account (doc id = uid); clicking a star saves it at once (with or
+// without a comment), "Remove rating" deletes it; average + count from a Firestore aggregation query (getAggregateFromServer: one read per
+// 1000 ratings instead of reading every rating); each commenter's stars next to their name on top-level comments (ratings read by uid).
 // Data + rules: site/firebase/firestore.rules (Firebase project on the free Spark plan). Text is always set with textContent, never as HTML.
 // Firebase scripts load from www.gstatic.com only when the section comes near the screen (or right away after a sign-in redirect);
 // Google's One Tap script (accounts.google.com/gsi/client) only after a click on the sign-in button.
@@ -35,7 +38,14 @@
     hist: ['Edit history', 'Lịch sử sửa'],
     gone: ['Comment deleted', 'Bình luận đã xoá'],
     cap: ['A comment can be edited 10 times.', 'Mỗi bình luận chỉ sửa được 10 lần.'],
-    nosave: ['Could not save. Try again.', 'Không lưu được. Thử lại.']
+    nosave: ['Could not save. Try again.', 'Không lưu được. Thử lại.'],
+    star: [['star', 'stars'], ['sao', 'sao']], // aria-label of the star buttons: "4 stars" / "4 sao"
+    of5: [' of 5 stars', ' trên 5 sao'], // stars next to a name: "4 of 5 stars"
+    ratings: [['rating', 'ratings'], ['đánh giá', 'đánh giá']], // "★ 4.6 (12 ratings)"
+    norate: ['No ratings yet', 'Chưa có đánh giá'],
+    noRateSave: ['Could not save your rating. Try again.', 'Không lưu được đánh giá. Thử lại.'],
+    delRate: ['Delete rating', 'Xoá đánh giá'], // admin, under a comment whose author rated
+    askRate: ['Delete this rating?', 'Xoá đánh giá này?']
   };
   var box = document.getElementById('cbox');
   if (!box || !FIREBASE.apiKey) return;
@@ -45,6 +55,7 @@
   var ta = q('textarea'), count = q('.c-count'), postBtn = q('.c-post');
   var MAIN = { ta: ta, btn: postBtn, count: count, err: err, need: need, parent: '' }; // the top box; reply boxes are made by form()
   var fb = null, user = null, claims = null, last = null, started = false, lis = {};
+  var avgEl = q('.c-avg'), stars = box.querySelectorAll('.c-star'), unrate = q('.c-unrate'), rates = {}, myRate = 0, pendingRate = 0; // rates: uid -> stars (0 = none)
 
   function vi() { return document.documentElement.getAttribute('data-lang') === 'vi' ? 1 : 0; }
   function two(el, pair) { // both languages, style.css shows the chosen one
@@ -83,6 +94,7 @@
         var ini = mk('span', 'c-ini'); ini.textContent = (d.name || '?').charAt(0).toUpperCase(); head.appendChild(ini);
       }
       var nm = mk('b'); nm.textContent = d.name || '?'; head.appendChild(nm);
+      if (!d.parent && rates[d.uid]) head.appendChild(starsOf(rates[d.uid]));
       var t = li._t, tm = mk('time'); tm.dateTime = t.toISOString();
       two(tm, [t.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }), t.toLocaleDateString('vi-VN')]);
       head.appendChild(tm);
@@ -102,15 +114,29 @@
     if (!d.deleted && !d.parent) a.appendChild(btn('c-reply', S.reply, function () { replyBox(li); }));
     if (!d.deleted && mine(d)) a.appendChild(btn('c-edit', S.edit, function () { editBox(li); }));
     if ((mine(d) || isAdmin()) && !(d.deleted && kids(li) && kids(li).children.length)) a.appendChild(btn('c-del', S.remove, function () { remove(li); }));
+    if (isAdmin() && !d.parent && rates[d.uid]) a.appendChild(btn('c-delrate', S.delRate, function () { unrateOf(d.uid); }));
     return a.children.length ? a : null;
   }
-  function refresh() { // after sign-in / out: the buttons follow the account (an open history stays open)
+  function refresh(uid) { // after sign-in / out (or a rating change of uid): buttons and stars follow; an open history stays open
     Array.prototype.forEach.call(list.querySelectorAll('.c-item'), function (li) {
+      var d = li._d, h = li.querySelector(':scope > .c-head');
+      if (uid && d.uid !== uid) return;
+      if (h && !d.parent) {
+        var o = h.querySelector('.c-stars'), n = rates[d.uid] ? starsOf(rates[d.uid]) : null;
+        if (o) o.remove();
+        if (n) h.insertBefore(n, h.querySelector('b').nextSibling);
+      }
       if (li.querySelector(':scope > .c-ebox')) return;
       var old = li.querySelector(':scope > .c-acts'), a = acts(li), at = li.querySelector(':scope > .c-hist') || li.querySelector(':scope > .c-text');
       if (old) old.remove();
       if (a) li.insertBefore(a, at.nextSibling);
     });
+  }
+  function starsOf(n) { // "★★★★☆" next to a name, read as "4 of 5 stars"
+    var e = mk('span', 'c-stars');
+    e.setAttribute('role', 'img'); e.setAttribute('data-n', n); e.setAttribute('aria-label', n + S.of5[vi()]);
+    e.textContent = '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+    return e;
   }
   function ierr(li) { // an error line under one comment
     var e = li.querySelector(':scope > .c-ierr');
@@ -130,6 +156,12 @@
       if (snap.docs.length) last = snap.docs[snap.docs.length - 1];
       more.hidden = snap.docs.length < PAGE;
       if (!ids.length) return;
+      var uids = ids.map(function (id) { return lis[id]._d.uid; }).filter(function (u, i, a) { return u && a.indexOf(u) === i && !(u in rates); });
+      if (uids.length) f.getDocs(f.query(f.collection(fb.db, 'ratings'), f.where(f.documentId(), 'in', uids))).then(function (rs) { // <= 20 uids
+        uids.forEach(function (u) { rates[u] = 0; });
+        rs.forEach(function (ds) { rates[ds.id] = ds.data().stars; });
+        uids.forEach(function (u) { if (rates[u]) refresh(u); });
+      }).catch(function () { /* stars next to names are optional */ });
       return f.getDocs(f.query(c, f.where('parent', 'in', ids), f.orderBy('created', 'asc'))).then(function (rs) { // PAGE <= 30, the 'in' limit
         rs.forEach(function (ds) { var d = ds.data(), up = lis[d.parent]; if (up) kids(up).appendChild(item(ds.id, d)); });
         ids.forEach(function (id) { if (lis[id]._d.deleted) render(lis[id]); });
@@ -152,6 +184,8 @@
   }
   function placeholder() {
     ta.placeholder = S.ph[vi()]; ta.setAttribute('aria-label', S.ph[vi()]);
+    Array.prototype.forEach.call(stars, function (b, i) { b.setAttribute('aria-label', (i + 1) + ' ' + S.star[vi()][i ? 1 : 0]); });
+    Array.prototype.forEach.call(box.querySelectorAll('.c-stars'), function (e) { e.setAttribute('aria-label', e.getAttribute('data-n') + S.of5[vi()]); });
     Array.prototype.forEach.call(box.querySelectorAll('.c-rform textarea'), function (t) { t.placeholder = S.rph[vi()]; t.setAttribute('aria-label', S.rph[vi()]); });
   }
 
@@ -202,7 +236,7 @@
         try { // the page reloads: keep the typed text, which box it was in and a pending Post for the way back
           var fm = signing || MAIN;
           sessionStorage.setItem('findid.c.redirect', '1');
-          sessionStorage.setItem('findid.c.draft', JSON.stringify({ text: fm.ta.value, post: pending === fm, parent: fm.parent }));
+          sessionStorage.setItem('findid.c.draft', JSON.stringify({ text: fm.ta.value, post: pending === fm, parent: fm.parent, rate: pendingRate || undefined }));
         } catch (x) { /* storage blocked: redirect still works, the text is lost */ }
         return a.signInWithRedirect(fb.au, p);
       }
@@ -210,7 +244,7 @@
       failed();
     });
   }
-  function failed() { var fm = signing || MAIN; signing = null; pending = null; if (!user) fm.need.hidden = false; } // every sign-in UI closed: the next click in the box tries again
+  function failed() { var fm = signing || MAIN; signing = null; pending = null; pendingRate = 0; if (!user) fm.need.hidden = false; } // every sign-in UI closed: the next click in the box tries again
   function count1(fm) { fm = fm || MAIN; fm.count.textContent = fm.ta.value.trim().length + '/' + MAX; }
   function ping(id) { if (NOTIFY_URL) fetch(NOTIFY_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ id: id }) }).catch(function () { /* notice is optional */ }); }
   function post(fm) {
@@ -337,6 +371,46 @@
     }).catch(function () { say(S.del, ierr(li)); });
   }
 
+  // Star ratings
+  function paint() { // the 5 buttons in the top box show the signed-in account's rating
+    Array.prototype.forEach.call(stars, function (b, i) { b.setAttribute('aria-checked', String(i + 1 === myRate)); b.classList.toggle('on', i < myRate); });
+    unrate.hidden = !myRate;
+  }
+  function summary() { // average + count of all ratings, one aggregation query
+    var f = fb.fs;
+    return f.getAggregateFromServer(f.collection(fb.db, 'ratings'), { avg: f.average('stars'), n: f.count() }).then(function (r) {
+      var a = r.data().avg, n = r.data().n;
+      if (!n) return two(avgEl, S.norate);
+      var o = { minimumFractionDigits: 1, maximumFractionDigits: 1 };
+      two(avgEl, ['★ ' + a.toLocaleString('en-US', o) + ' (' + n + ' ' + S.ratings[0][n === 1 ? 0 : 1] + ')', '★ ' + a.toLocaleString('vi-VN', o) + ' (' + n + ' ' + S.ratings[1][1] + ')']);
+    }).catch(function () { avgEl.textContent = ''; });
+  }
+  function rate(n) { // n 1-5 saves the account's rating, 0 removes it; signed out: sign in first, then save
+    say(null);
+    if (!user) { pendingRate = n; return signIn(MAIN); }
+    var f = fb.fs, ref = f.doc(fb.db, 'ratings', user.uid), was = myRate;
+    myRate = n; paint();
+    (n ? f.setDoc(ref, { stars: n, at: f.serverTimestamp(), name: claims.name || '', photo: claims.picture || '' }) : f.deleteDoc(ref)).then(function () {
+      rates[user.uid] = n; refresh(user.uid); summary();
+    }).catch(function () { myRate = was; paint(); say(S.noRateSave); });
+  }
+  function unrateOf(uid) { // admin removes someone's rating
+    if (!window.confirm(S.askRate[vi()])) return;
+    var f = fb.fs;
+    f.deleteDoc(f.doc(fb.db, 'ratings', uid)).then(function () {
+      rates[uid] = 0; if (user && uid === user.uid) { myRate = 0; paint(); }
+      refresh(uid); summary();
+    }).catch(function () { say(S.del); });
+  }
+  function mineRate() { // the signed-in account's own rating into the 5 buttons
+    if (!user) { myRate = 0; paint(); return Promise.resolve(); }
+    var f = fb.fs, uid = user.uid;
+    return f.getDoc(f.doc(fb.db, 'ratings', uid)).then(function (ds) {
+      if (!user || user.uid !== uid) return;
+      myRate = ds.exists() ? ds.data().stars : 0; rates[uid] = myRate; paint(); refresh(uid);
+    }).catch(function () { /* buttons stay empty */ });
+  }
+
   function start() {
     if (started) return; started = true;
     Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-auth.js'), import(SDK + 'firebase-firestore.js')]).then(function (m) {
@@ -352,7 +426,7 @@
         if (!draft) return;
         var fm = draft.parent ? (lis[draft.parent] && replyBox(lis[draft.parent])) : MAIN;
         if (!fm) return;
-        fm.ta.value = draft.text || ''; count1(fm); signing = fm; pending = draft.post ? fm : null;
+        fm.ta.value = draft.text || ''; count1(fm); signing = fm; pending = draft.post ? fm : null; pendingRate = draft.rate || 0;
       }
       var first = true;
       m[1].onAuthStateChanged(fb.au, function (u) {
@@ -360,8 +434,10 @@
         var ready = u ? u.getIdTokenResult().then(function (t) { claims = t.claims; }) : Promise.resolve();
         ready.then(function () {
           var wasFirst = first, listed;
-          if (first) { first = false; listed = page().then(restore); } else { refresh(); listed = Promise.resolve(); }
+          if (first) { first = false; listed = page().then(restore); summary(); } else { refresh(); listed = Promise.resolve(); }
+          listed = listed.then(mineRate);
           listed.then(function () {
+            if (u && pendingRate) { var r = pendingRate; pendingRate = 0; rate(r); } // the star clicked before signing in
             if (u && signing) { var fm = signing; signing = null; fm.ta.focus(); if (pending) { var p = pending; pending = null; post(p); } }
             else if (!u && signing && wasFirst && draft) failed(); // came back from the redirect without signing in
           });
@@ -376,6 +452,8 @@
   postBtn.addEventListener('click', function () { post(MAIN); });
   ta.addEventListener('input', function () { count1(MAIN); });
   more.addEventListener('click', page);
+  Array.prototype.forEach.call(stars, function (b, i) { b.addEventListener('click', function () { if (i + 1 !== myRate) rate(i + 1); }); });
+  unrate.addEventListener('click', function () { rate(0); });
   count1(MAIN); placeholder();
   new MutationObserver(placeholder).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
   var redirected = false;
