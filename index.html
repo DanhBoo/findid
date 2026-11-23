@@ -30,10 +30,8 @@
 <section class="hero"><div class="wrap">
   <p class="eyebrow" lang="en">Plug-in for Adobe Photoshop®</p>
   <p class="eyebrow" lang="vi">Plugin cho Adobe Photoshop®</p>
-  <h1 lang="en">Find the PSD behind an exported image. <span class="dim">Every version stays in its project.</span></h1>
-  <h1 lang="vi">Tìm ra file PSD gốc của ảnh đã xuất. <span class="dim">Version nào cũng nằm đúng dự án.</span></h1>
-  <p class="lead" lang="en">Drop a JPG or PNG on the panel and FindID shows the PSD / PSB it came from, with its project and version. Everything runs on your computer.</p>
-  <p class="lead" lang="vi">Thả ảnh JPG / PNG vào panel, FindID hiện file PSD / PSB gốc kèm dự án và version. Mọi thứ chỉ chạy trên máy bạn.</p>
+  <h1 lang="en">Find &amp; manage your PSDs, <span class="dim">simple and easy.</span></h1>
+  <h1 lang="vi">Tìm – Quản lý PTS <span class="dim">đơn giản &amp; dễ dàng.</span></h1>
   <div class="btns dl" id="dl-btns">
     <a class="btn big" href="download.html#win" data-os="win"><span lang="en">Download for Windows</span><span lang="vi">Tải cho Windows</span></a>
     <a class="btn big ghost" href="download.html#mac" data-os="mac"><span lang="en">Download for Mac</span><span lang="vi">Tải cho Mac</span></a>
@@ -48,16 +46,18 @@
     var os = /mac/.test(p) && !/iphone|ipad/.test(p) ? 'mac' : 'win';
     var bs = document.querySelectorAll('#dl-btns .btn');
     // solid = no "ghost" class. The pair shows one solid button: the visitor's OS at first, then the one under the pointer / keyboard focus; leaving the pair returns it to the OS button.
-    function solid(k) { for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('ghost', bs[i].getAttribute('data-os') !== k); }
+    // The platform line under the pair follows the solid button (user 2026-11-23: Mac solid but "For Windows 10 / 11" shown).
+    var ls = document.querySelectorAll('.hero .osline');
+    function solid(k) {
+      for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('ghost', bs[i].getAttribute('data-os') !== k);
+      for (var j = 0; j < ls.length; j++) ls[j].hidden = ls[j].getAttribute('data-os') !== k;
+    }
     solid(os);
-    var box = document.getElementById('dl-btns');
     for (var b = 0; b < bs.length; b++) (function (el) {
       var k = el.getAttribute('data-os');
       el.addEventListener('pointerenter', function () { solid(k); });
       el.addEventListener('focus', function () { solid(k); });
     })(bs[b]);
-    var ls = document.querySelectorAll('.hero .osline');
-    for (var j = 0; j < ls.length; j++) ls[j].hidden = ls[j].getAttribute('data-os') !== os;
   })();
   </script>
   <p class="fine" lang="en">Version 0.4.7 (testing)</p>
