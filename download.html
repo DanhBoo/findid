@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Download FindID - plug-in for Adobe Photoshop®</title>
 <meta name="description" content="Download FindID for Adobe Photoshop®: install from Adobe Creative Cloud Marketplace or buy on findid.app. Versions and system requirements.">
+<script>(function(){var t=null;try{t=localStorage.getItem('findid.theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="stylesheet" href="style.css">
 <script src="lang.js"></script>
 </head>
@@ -12,19 +13,22 @@
 <header class="top"><div class="wrap">
   <a class="brand" href="index.html">FindID</a>
   <nav class="menu">
-    <a href="index.html#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
-    <a href="index.html#how"><span lang="en">How Find works</span><span lang="vi">Cách Tìm hoạt động</span></a>
-    <a href="index.html#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
-    <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
-    <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
+    <a class="m-hide" href="index.html#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
+    <a class="m-hide" href="index.html#how"><span lang="en">How Find works</span><span lang="vi">Cách Tìm hoạt động</span></a>
+    <a class="m-hide" href="index.html#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
+    <a href="pricing.html"><span lang="en">Pricing</span><span lang="vi">Giá</span></a>
+    <a class="m-hide" href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
+    <a href="download.html" aria-current="page"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
   </nav>
-  <div class="langs"><button type="button" data-set="en">EN</button><button type="button" data-set="vi">VI</button></div>
+  <div class="langs"><button type="button" data-set="en">EN</button><button type="button" data-set="vi">VI</button><button type="button" class="theme" id="theme-btn"><svg class="i-sun" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 13.5A9 9 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z"/></svg></button></div>
 </div></header>
 
 <main class="wrap dlpage" data-version="0.4.7">
+ <div class="dlhero">
+ <div class="dlmain">
   <h1 lang="en">Download FindID</h1><h1 lang="vi">Tải FindID</h1>
-  <p class="lead" lang="en">Pick your computer and the package. Until the release, downloads need a tester code.</p>
-  <p class="lead" lang="vi">Chọn loại máy và gói tải. Trước ngày phát hành, cần mã dùng thử để tải.</p>
+  <p class="lead" lang="en">Until the release, downloads need a tester code.</p>
+  <p class="lead" lang="vi">Trước ngày phát hành, cần mã dùng thử để tải.</p>
 
   <div class="tabs" role="tablist">
     <a id="win" href="#win" role="tab" aria-controls="pane-win" aria-selected="true">Windows</a>
@@ -32,92 +36,93 @@
   </div>
 
   <div class="pane on" id="pane-win" data-os="win" role="tabpanel" aria-labelledby="win">
-    <div class="dlrow">
-      <div>
-        <a class="btn big dlbtn" href="#tester" data-pkg="cc"><span lang="en">Download FindID <span class="v"></span>– Creative Cloud</span><span lang="vi">Tải FindID <span class="v"></span>– Creative Cloud</span></a>
-        <p class="lbl">Adobe Store</p>
-      </div>
-      <div>
-        <a class="btn big ghost dlbtn" href="#tester" data-pkg="win"><span lang="en">Download FindID <span class="v"></span></span><span lang="vi">Tải FindID <span class="v"></span></span></a>
-        <p class="lbl" lang="en">findid.app · card / Apple Pay / Google Pay</p>
-        <p class="lbl" lang="vi">findid.app · thẻ / Apple Pay / Google Pay</p>
-        <p lang="en">After paying, the download starts and the link is emailed to you.</p>
-        <p lang="vi">Trả tiền xong là tải về, link tải cũng gửi qua email.</p>
-      </div>
-    </div>
+    <a class="btn big dlbtn" href="#tester" data-pkg="win"><span lang="en">Download FindID <span class="v"></span></span><span lang="vi">Tải FindID <span class="v"></span></span></a>
+    <p class="plat" lang="en">For Windows 10 / 11 · Adobe Photoshop® 2023 or later</p>
+    <p class="plat" lang="vi">Cho Windows 10 / 11 · Adobe Photoshop® 2023 trở lên</p>
+    <p class="price" lang="en"><b>2 USD</b>, one-time · card / Apple Pay / Google Pay</p>
+    <p class="price" lang="vi"><b>2 USD</b>, mua một lần · thẻ / Apple Pay / Google Pay</p>
+    <p class="cc"><span lang="en">Use Creative Cloud? </span><span lang="vi">Dùng Creative Cloud? </span><a class="dlbtn" href="#tester" data-pkg="cc"><span lang="en">Get FindID on the Adobe Store</span><span lang="vi">Lấy FindID trên Adobe Store</span></a></p>
   </div>
   <div class="pane" id="pane-mac" data-os="mac" role="tabpanel" aria-labelledby="mac">
-    <div class="dlrow">
-      <div>
-        <a class="btn big dlbtn" href="#tester" data-pkg="mac"><span lang="en">Download FindID <span class="v"></span>– Creative Cloud</span><span lang="vi">Tải FindID <span class="v"></span>– Creative Cloud</span></a>
-        <p class="lbl">Adobe Store</p>
-      </div>
-      <div>
-        <a class="btn big ghost dlbtn" href="#tester" data-pkg="mac"><span lang="en">Download FindID <span class="v"></span>– Mac</span><span lang="vi">Tải FindID <span class="v"></span>– Mac</span></a>
-        <p class="lbl" lang="en">findid.app · card / Apple Pay / Google Pay</p>
-        <p class="lbl" lang="vi">findid.app · thẻ / Apple Pay / Google Pay</p>
-        <p lang="en">After paying, the download starts and the link is emailed to you.</p>
-        <p lang="vi">Trả tiền xong là tải về, link tải cũng gửi qua email.</p>
-      </div>
-    </div>
+    <a class="btn big dlbtn" href="#tester" data-pkg="mac"><span lang="en">Download FindID <span class="v"></span>– Mac</span><span lang="vi">Tải FindID <span class="v"></span>– Mac</span></a>
+    <p class="plat" lang="en">For macOS · Adobe Photoshop® 2023 or later</p>
+    <p class="plat" lang="vi">Cho macOS · Adobe Photoshop® 2023 trở lên</p>
+    <p class="price" lang="en"><b>2 USD</b>, one-time · card / Apple Pay / Google Pay</p>
+    <p class="price" lang="vi"><b>2 USD</b>, mua một lần · thẻ / Apple Pay / Google Pay</p>
+    <p class="cc"><span lang="en">Use Creative Cloud? </span><span lang="vi">Dùng Creative Cloud? </span><a class="dlbtn" href="#tester" data-pkg="mac"><span lang="en">Get FindID on the Adobe Store</span><span lang="vi">Lấy FindID trên Adobe Store</span></a></p>
   </div>
+  <p class="terms" lang="en">By downloading FindID you agree to the <a href="legal.html">Licence</a> and <a href="legal.html#privacy">Privacy</a> terms.</p>
+  <p class="terms" lang="vi">Tải FindID là bạn đồng ý với <a href="legal.html">Giấy phép</a> và <a href="legal.html#privacy">Chính sách riêng tư</a>.</p>
 
   <section class="tester" id="tester">
-    <h2 lang="en">Have a tester code?</h2><h2 lang="vi">Có mã dùng thử?</h2>
     <script type="application/json" id="tester-payload">[{"salt": "qvb+2rD7KuMPXbHh+Wna4w==", "iv": "YByKnfachjTyTchF", "ct": "dmVezYXh6MphTTKvhYfeKA3LwWnT1smkb172Pm4+Ab9cRir5VgRbby+803jXfZPXf9KnbdluCjx1LRjTQVYiiTc/sH1uHcNe8yOL1t9rDt9H/8diNihlQeE+cHI8mFfUGxH49+hofM93K8ecGUZv3YKxlTDkHOs0ML2z4ujsVhR3HH4OCgcOxYcRHj8FrFkOz2aEt0TrHAkH2EHlR9H1bQap3+D+dfeAkqzAYcNfp+VvTXnuWV1UJwvDGD0aBPLpvnsQi5qhaZ82IKeVh5fpelvXHLKFReK/HZPJuvxdsxUCmAAvK4qcuVTsQC/xXCFa7Ukav7y5x3d5ceBfcqwIYyGcOGEfTcHaYbYZwPKGvVOjcmtm1Ar3COI4s69tmpoBc6HJDe2WkFa9js3DHyHf0Nr1hVSfo9b6BT89mLb0hGyZ8SZsv4h1G7qNaLIU3/S9Am3mapeQ", "iter": 200000}, {"salt": "751sxyJIg00NHB6QpXpaKA==", "iv": "u0DQ0HTbGz1rajy7", "ct": "XMuhY7Uru2ThZgLIdG1TyHmqKB2iqJEqqWTtn+Zs6jyqtojr2EKyd5oU1hdoIAocKpkEN7qql9V0M57FsyFgEcY7XgY2R9S8YzPcj5hPYpYTzjxSrpM66NYOAwDQEvzaUcRLMIvYZzYt9z0kZyU0A7COOCIsAXVFrEtBHxt5CIMp8lu9xKd2THcR9DKDlKQb5+XiD00wkBwSE+DhMMXAsOmiRP2CV2Om3G0z4bBl+xT5GM+Ufu0BW0nyBFco69UDNLs+x+5MUVRHxipbsSACDmQ+oy3N0XpLVMsac9Z53vgTUgAOFxDzfuj3jmjB57ynHLYDNdeMoo6fotGjf88kotD+kHSNGVxCXPUz+uQO3OebUGHAZsyX2aPVhwDMixGu3omy0yatthiElFxbwAoNgBYj9S61eJaZywqyOAXk5PEo5bIq2nIynPkCp+zUAEayEPR85PQK", "iter": 200000}]</script>
     <p class="tmsg" id="tester-none" lang="en">Not available yet.</p>
     <p class="tmsg" id="tester-none-vi" lang="vi">Chưa có.</p>
     <form id="tester-form" hidden>
       <input id="tester-code" type="text" autocomplete="off" spellcheck="false" aria-label="Tester code / Mã dùng thử">
-      <button type="submit" class="btn ghost"><span lang="en">Use code</span><span lang="vi">Dùng mã</span></button>
+      <button type="submit" class="btn ghost"><span lang="en">Redeem code</span><span lang="vi">Đổi mã</span></button>
     </form>
     <p class="tmsg" id="tester-hint" hidden><span lang="en">Enter your tester code to download.</span><span lang="vi">Nhập mã dùng thử để tải.</span></p>
     <p class="tmsg" id="tester-bad" hidden><span lang="en">Code not valid.</span><span lang="vi">Mã không đúng.</span></p>
     <p class="tmsg tok" id="tester-ok" hidden><span lang="en">Code accepted — download free.</span><span lang="vi">Mã đúng — tải miễn phí.</span></p>
   </section>
+ </div>
+ <div class="dlvisual">
+  <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_projects_dark_en.png"><img src="media/panel_projects_light_en.png" width="503" height="840" alt="Projects tab: five projects, each with its versions and thumbnails"></picture>
+  <picture lang="vi"><source media="(prefers-color-scheme: dark)" srcset="media/panel_projects_dark_vi.png"><img src="media/panel_projects_light_vi.png" width="503" height="840" alt="Tab Dự án: năm dự án, mỗi dự án có các version kèm ảnh nhỏ"></picture>
+ </div>
+ </div>
 
-  <div class="pane on" id="pane-win-info" data-os="win">
-    <h2 lang="en">Install</h2><h2 lang="vi">Cài đặt</h2>
-    <ul class="req" lang="en">
-      <li><b>Adobe Store</b>Creative Cloud installs FindID and keeps it up to date.</li>
-      <li><b>findid.app</b>Unzip, copy the FindID folder into Photoshop's Plug-ins folder (<code>C:\Program Files\Adobe\Adobe Photoshop &lt;year&gt;\Plug-ins\</code>), then open Plugins &gt; FindID in Photoshop.</li>
-    </ul>
-    <ul class="req" lang="vi">
-      <li><b>Adobe Store</b>Creative Cloud tự cài và tự cập nhật FindID.</li>
-      <li><b>findid.app</b>Giải nén, chép thư mục FindID vào thư mục Plug-ins của Photoshop (<code>C:\Program Files\Adobe\Adobe Photoshop &lt;năm&gt;\Plug-ins\</code>), rồi mở Plugins &gt; FindID trong Photoshop.</li>
-    </ul>
-    <h2 lang="en">System requirements</h2><h2 lang="vi">Cấu hình cần có</h2>
-    <ul class="req" lang="en">
-      <li><b>Windows</b>Windows 10 or 11</li>
-      <li><b>Photoshop</b>Adobe Photoshop® 2023 (24.0) or later</li>
-    </ul>
-    <ul class="req" lang="vi">
-      <li><b>Windows</b>Windows 10 hoặc 11</li>
-      <li><b>Photoshop</b>Adobe Photoshop® 2023 (bản 24.0) trở lên</li>
-    </ul>
+  <div class="pane dlinfo on" id="pane-win-info" data-os="win">
+    <div class="card">
+      <h2 lang="en">Install</h2><h2 lang="vi">Cài đặt</h2>
+      <ul class="req" lang="en">
+        <li><b>findid.app</b>After paying, the download starts and the link is emailed to you. Unzip, copy the FindID folder into Photoshop's Plug-ins folder (<code>C:\Program Files\Adobe\Adobe Photoshop &lt;year&gt;\Plug-ins\</code>), then open Plugins &gt; FindID in Photoshop.</li>
+        <li><b>Adobe Store</b>Creative Cloud installs FindID and keeps it up to date.</li>
+      </ul>
+      <ul class="req" lang="vi">
+        <li><b>findid.app</b>Trả tiền xong là tải về, link tải cũng gửi qua email. Giải nén, chép thư mục FindID vào thư mục Plug-ins của Photoshop (<code>C:\Program Files\Adobe\Adobe Photoshop &lt;năm&gt;\Plug-ins\</code>), rồi mở Plugins &gt; FindID trong Photoshop.</li>
+        <li><b>Adobe Store</b>Creative Cloud tự cài và tự cập nhật FindID.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2 lang="en">System requirements</h2><h2 lang="vi">Cấu hình cần có</h2>
+      <ul class="req" lang="en">
+        <li><b>Windows</b>Windows 10 or 11</li>
+        <li><b>Photoshop</b>Adobe Photoshop® 2023 (24.0) or later</li>
+      </ul>
+      <ul class="req" lang="vi">
+        <li><b>Windows</b>Windows 10 hoặc 11</li>
+        <li><b>Photoshop</b>Adobe Photoshop® 2023 (bản 24.0) trở lên</li>
+      </ul>
+    </div>
   </div>
-  <div class="pane" id="pane-mac-info" data-os="mac">
-    <h2 lang="en">Install</h2><h2 lang="vi">Cài đặt</h2>
-    <ul class="req" lang="en">
-      <li><b>Adobe Store</b>Creative Cloud installs FindID and keeps it up to date.</li>
-      <li><b>findid.app</b>Unzip and double-click the .ccx file: Creative Cloud installs it (Install, then OK). When macOS asks to let Photoshop read a folder, click Allow.</li>
-    </ul>
-    <ul class="req" lang="vi">
-      <li><b>Adobe Store</b>Creative Cloud tự cài và tự cập nhật FindID.</li>
-      <li><b>findid.app</b>Giải nén, bấm đúp file .ccx: Creative Cloud tự cài (Install, rồi OK). macOS hỏi cho Photoshop đọc thư mục thì bấm Allow.</li>
-    </ul>
-    <h2 lang="en">System requirements</h2><h2 lang="vi">Cấu hình cần có</h2>
-    <ul class="req" lang="en">
-      <li><b>Mac</b>with the Creative Cloud app</li>
-      <li><b>Photoshop</b>Adobe Photoshop® 2023 (24.0) or later</li>
-    </ul>
-    <ul class="req" lang="vi">
-      <li><b>Mac</b>có ứng dụng Creative Cloud</li>
-      <li><b>Photoshop</b>Adobe Photoshop® 2023 (bản 24.0) trở lên</li>
-    </ul>
+  <div class="pane dlinfo" id="pane-mac-info" data-os="mac">
+    <div class="card">
+      <h2 lang="en">Install</h2><h2 lang="vi">Cài đặt</h2>
+      <ul class="req" lang="en">
+        <li><b>findid.app</b>After paying, the download starts and the link is emailed to you. Unzip and double-click the .ccx file: Creative Cloud installs it (Install, then OK). When macOS asks to let Photoshop read a folder, click Allow.</li>
+        <li><b>Adobe Store</b>Creative Cloud installs FindID and keeps it up to date.</li>
+      </ul>
+      <ul class="req" lang="vi">
+        <li><b>findid.app</b>Trả tiền xong là tải về, link tải cũng gửi qua email. Giải nén, bấm đúp file .ccx: Creative Cloud tự cài (Install, rồi OK). macOS hỏi cho Photoshop đọc thư mục thì bấm Allow.</li>
+        <li><b>Adobe Store</b>Creative Cloud tự cài và tự cập nhật FindID.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2 lang="en">System requirements</h2><h2 lang="vi">Cấu hình cần có</h2>
+      <ul class="req" lang="en">
+        <li><b>Mac</b>with the Creative Cloud app</li>
+        <li><b>Photoshop</b>Adobe Photoshop® 2023 (24.0) or later</li>
+      </ul>
+      <ul class="req" lang="vi">
+        <li><b>Mac</b>có ứng dụng Creative Cloud</li>
+        <li><b>Photoshop</b>Adobe Photoshop® 2023 (bản 24.0) trở lên</li>
+      </ul>
+    </div>
   </div>
 
-  <section id="versions">
+  <section class="dlsec" id="versions">
     <h2 lang="en">Versions</h2><h2 lang="vi">Các phiên bản</h2>
     <p lang="en">Current version: <span class="v"></span>(testing), 22 Nov 2026. Updates: from Adobe, Creative Cloud updates FindID by itself; from findid.app, download the new version with the link in your order email or on your customer page. Your projects are kept.</p>
     <p lang="vi">Phiên bản hiện tại: <span class="v"></span>(đang thử nghiệm), 22/11/2026. Cập nhật: cài từ Adobe thì Creative Cloud tự cập nhật; mua tại findid.app thì tải bản mới bằng link trong email đơn hàng hoặc trang khách hàng. Dự án của bạn vẫn giữ nguyên.</p>
@@ -178,7 +183,7 @@
     </ol>
   </section>
 
-  <section id="more">
+  <section class="dlsec" id="more">
     <h2 lang="en">Refunds and terms</h2><h2 lang="vi">Hoàn tiền và điều khoản</h2>
     <p lang="en">Refunds and help: <a href="support.html#refunds">Support page</a>. Licence and privacy: <a href="legal.html">Licence &amp; Privacy</a>.</p>
     <p lang="vi">Hoàn tiền và trợ giúp: <a href="support.html#refunds">trang Hỗ trợ</a>. Giấy phép và riêng tư: <a href="legal.html">Giấy phép &amp; Riêng tư</a>.</p>
@@ -273,10 +278,13 @@
 <footer class="bottom"><div class="wrap">
   <nav>
     <a href="index.html">FindID</a>
+    <a href="pricing.html"><span lang="en">Pricing</span><span lang="vi">Giá</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
     <a href="legal.html"><span lang="en">Licence &amp; Privacy</span><span lang="vi">Giấy phép &amp; Riêng tư</span></a>
     <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
   </nav>
+  <p lang="en">Artist: <a href="https://danhboo.github.io/danh-portfolio-v1/" target="_blank" rel="noopener">danhboo.github.io/danh-portfolio-v1</a></p>
+  <p lang="vi">Hoạ sĩ: <a href="https://danhboo.github.io/danh-portfolio-v1/" target="_blank" rel="noopener">danhboo.github.io/danh-portfolio-v1</a></p>
   <p lang="en">Adobe and Photoshop are either registered trademarks or trademarks of Adobe in the United States and/or other countries.</p>
   <p lang="vi">Adobe và Photoshop là nhãn hiệu hoặc nhãn hiệu đã đăng ký của Adobe tại Hoa Kỳ và/hoặc các quốc gia khác.</p>
 </div></footer>

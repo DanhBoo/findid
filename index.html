@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FindID - plug-in for Adobe Photoshop®</title>
 <meta name="description" content="FindID, plug-in for Adobe Photoshop®: drop an exported image and open the PSD / PSB it came from. Versions stay in the right project after a rename, move or copy.">
+<script>(function(){var t=null;try{t=localStorage.getItem('findid.theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="stylesheet" href="style.css">
 <script src="lang.js"></script>
 </head>
@@ -12,13 +13,14 @@
 <header class="top"><div class="wrap">
   <a class="brand" href="index.html">FindID</a>
   <nav class="menu">
-    <a href="#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
-    <a href="#how"><span lang="en">How Find works</span><span lang="vi">Cách Tìm hoạt động</span></a>
-    <a href="#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
-    <a href="#support"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
+    <a class="m-hide" href="#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
+    <a class="m-hide" href="#how"><span lang="en">How Find works</span><span lang="vi">Cách Tìm hoạt động</span></a>
+    <a class="m-hide" href="#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
+    <a href="pricing.html"><span lang="en">Pricing</span><span lang="vi">Giá</span></a>
+    <a class="m-hide" href="#support"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
   </nav>
-  <div class="langs"><button type="button" data-set="en">EN</button><button type="button" data-set="vi">VI</button></div>
+  <div class="langs"><button type="button" data-set="en">EN</button><button type="button" data-set="vi">VI</button><button type="button" class="theme" id="theme-btn"><svg class="i-sun" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 13.5A9 9 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z"/></svg></button></div>
 </div></header>
 
 <main>
@@ -33,17 +35,32 @@
     <a class="btn big" href="download.html#win" data-os="win"><span lang="en">Download for Windows</span><span lang="vi">Tải cho Windows</span></a>
     <a class="btn big ghost" href="download.html#mac" data-os="mac"><span lang="en">Download for Mac</span><span lang="vi">Tải cho Mac</span></a>
   </div>
+  <p class="fine osline" data-os="win"><span lang="en">For Windows 10 / 11 · Adobe Photoshop® 2023 or later</span><span lang="vi">Cho Windows 10 / 11 · Adobe Photoshop® 2023 trở lên</span></p>
+  <p class="fine osline" data-os="mac" hidden><span lang="en">For macOS · Adobe Photoshop® 2023 or later</span><span lang="vi">Cho macOS · Adobe Photoshop® 2023 trở lên</span></p>
   <script>
-  // The button for the visitor's OS gets the solid style; no OS found (or not Mac) -> Windows stays solid, as in the markup.
+  // Like google.com/chrome: the button for the visitor's OS gets the solid style (first in line) and the small line under it names that OS.
+  // OS = navigator.userAgentData.platform, then navigator.platform / userAgent; macOS -> Mac, anything else (or no script) -> Windows, as in the markup.
   (function () {
     var p = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || navigator.userAgent || '').toLowerCase();
-    if (!/mac/.test(p) || /iphone|ipad/.test(p)) return;
+    var os = /mac/.test(p) && !/iphone|ipad/.test(p) ? 'mac' : 'win';
     var bs = document.querySelectorAll('#dl-btns .btn');
-    for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('ghost', bs[i].getAttribute('data-os') !== 'mac');
+    // solid = no "ghost" class. The pair shows one solid button: the visitor's OS at first, then the one under the pointer / keyboard focus; leaving the pair returns it to the OS button.
+    function solid(k) { for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('ghost', bs[i].getAttribute('data-os') !== k); }
+    solid(os);
+    var box = document.getElementById('dl-btns');
+    for (var b = 0; b < bs.length; b++) (function (el) {
+      var k = el.getAttribute('data-os');
+      el.addEventListener('pointerenter', function () { solid(k); });
+      el.addEventListener('focus', function () { solid(k); });
+    })(bs[b]);
+    var ls = document.querySelectorAll('.hero .osline');
+    for (var j = 0; j < ls.length; j++) ls[j].hidden = ls[j].getAttribute('data-os') !== os;
   })();
   </script>
-  <p class="fine" lang="en">Version 0.4.7 (testing) · Windows 10 / 11 and Mac · Adobe Photoshop® 2023 (24.0) or later</p>
-  <p class="fine" lang="vi">Bản 0.4.7 (đang thử nghiệm) · Windows 10 / 11 và Mac · Adobe Photoshop® 2023 (bản 24.0) trở lên</p>
+  <p class="price" lang="en"><b>2 USD</b>, one-time purchase · <a href="pricing.html">See pricing</a></p>
+  <p class="price" lang="vi"><b>2 USD</b>, mua một lần · <a href="pricing.html">Xem giá</a></p>
+  <p class="fine" lang="en">Version 0.4.7 (testing)</p>
+  <p class="fine" lang="vi">Bản 0.4.7 (đang thử nghiệm)</p>
   <div class="stage">
     <div class="canvas">
       <img src="media/sample_poster.jpg" width="960" height="720" alt="">
@@ -79,8 +96,8 @@
       <p lang="vi">Mỗi version mới thì Save As tên mới, version tự nằm trên cùng dự án, kèm ảnh nhỏ. Đổi tên, dời hay chép PSD thì file vẫn biết mình thuộc dự án nào.</p>
     </div>
     <div class="shot">
-      <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_projects_dark_en.png"><img src="media/panel_projects_light_en.png" width="503" height="840" loading="lazy" alt="Projects tab: two projects, each with its versions and thumbnails"></picture>
-      <picture lang="vi"><source media="(prefers-color-scheme: dark)" srcset="media/panel_projects_dark_vi.png"><img src="media/panel_projects_light_vi.png" width="503" height="840" loading="lazy" alt="Tab Dự án: hai dự án, mỗi dự án có các version kèm ảnh nhỏ"></picture>
+      <picture lang="en"><source media="(prefers-color-scheme: dark)" srcset="media/panel_projects_dark_en.png"><img src="media/panel_projects_light_en.png" width="503" height="840" loading="lazy" alt="Projects tab: five projects, each with its versions and thumbnails"></picture>
+      <picture lang="vi"><source media="(prefers-color-scheme: dark)" srcset="media/panel_projects_dark_vi.png"><img src="media/panel_projects_light_vi.png" width="503" height="840" loading="lazy" alt="Tab Dự án: năm dự án, mỗi dự án có các version kèm ảnh nhỏ"></picture>
     </div>
   </div>
   <div class="feature">
@@ -129,10 +146,19 @@
   </div>
 </div></section>
 
-<section class="block" id="availability"><div class="wrap soon">
-  <h2 class="head2" lang="en">Get FindID</h2><h2 class="head2" lang="vi">Tải FindID</h2>
-  <p lang="en">Install from Adobe Creative Cloud Marketplace or buy here on findid.app. Versions and install steps are on the <a href="download.html">Download page</a>.</p>
-  <p lang="vi">Cài từ Adobe Creative Cloud Marketplace hoặc mua ngay tại findid.app. Các phiên bản và cách cài có ở <a href="download.html">trang Tải về</a>.</p>
+<section class="block" id="availability"><div class="wrap"><div class="card getcard">
+  <div>
+    <h2 class="head2" lang="en">Get FindID</h2><h2 class="head2" lang="vi">Tải FindID</h2>
+    <p lang="en">Install from Adobe Creative Cloud Marketplace or buy here on findid.app. Versions and install steps are on the <a href="download.html">Download page</a>.</p>
+    <p lang="vi">Cài từ Adobe Creative Cloud Marketplace hoặc mua ngay tại findid.app. Các phiên bản và cách cài có ở <a href="download.html">trang Tải về</a>.</p>
+  </div>
+  <div class="getbuy">
+    <p class="amount">2 USD</p>
+    <p class="per" lang="en">one-time purchase</p><p class="per" lang="vi">mua một lần</p>
+    <a class="btn big" href="download.html"><span lang="en">Download FindID</span><span lang="vi">Tải FindID</span></a>
+    <a class="alt" href="pricing.html"><span lang="en">See pricing</span><span lang="vi">Xem giá</span></a>
+  </div>
+</div>
 </div></section>
 
 <section class="block" id="faq"><div class="wrap faq">
@@ -144,6 +170,8 @@
     <details lang="vi"><summary>Tranh của tôi có bị gửi đi đâu không?</summary><p>Không. FindID chỉ chạy trên máy bạn. Chi tiết: <a href="legal.html#privacy">Chính sách riêng tư</a>.</p></details>
     <details lang="en"><summary>Which images can it trace back?</summary><p>Images saved with Save a Copy, Save As or Save for Web carry the ID and are found straight away. Others, such as Export As or a cropped copy, are compared by look and the closest PSD is shown.</p></details>
     <details lang="vi"><summary>Ảnh nào thì tìm lại được PSD?</summary><p>Ảnh lưu bằng Save a Copy, Save As hay Save for Web mang ID nên tìm ra ngay. Ảnh khác, như Export As hay bản đã cắt, được so theo hình và hiện PSD giống nhất.</p></details>
+    <details lang="en"><summary>How much does FindID cost?</summary><p>2 USD, one-time purchase, on findid.app. On the Adobe Store the price is shown there. Details: <a href="pricing.html">Pricing</a>.</p></details>
+    <details lang="vi"><summary>FindID giá bao nhiêu?</summary><p>2 USD, mua một lần, tại findid.app. Trên Adobe Store thì giá hiện ở đó. Chi tiết: <a href="pricing.html">trang Giá</a>.</p></details>
     <details lang="en"><summary>What do I need?</summary><p>Windows 10 or 11, or a Mac, with Adobe Photoshop® 2023 (24.0) or later. On a Mac, FindID installs through the Creative Cloud app.</p></details>
     <details lang="vi"><summary>Cần máy thế nào?</summary><p>Windows 10 hoặc 11, hoặc máy Mac, cùng Adobe Photoshop® 2023 (bản 24.0) trở lên. Trên Mac, FindID cài qua ứng dụng Creative Cloud.</p></details>
   </div>
@@ -158,10 +186,14 @@
 
 <footer class="bottom"><div class="wrap">
   <nav>
+    <a href="index.html">FindID</a>
+    <a href="pricing.html"><span lang="en">Pricing</span><span lang="vi">Giá</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
     <a href="legal.html"><span lang="en">Licence &amp; Privacy</span><span lang="vi">Giấy phép &amp; Riêng tư</span></a>
     <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
   </nav>
+  <p lang="en">Artist: <a href="https://danhboo.github.io/danh-portfolio-v1/" target="_blank" rel="noopener">danhboo.github.io/danh-portfolio-v1</a></p>
+  <p lang="vi">Hoạ sĩ: <a href="https://danhboo.github.io/danh-portfolio-v1/" target="_blank" rel="noopener">danhboo.github.io/danh-portfolio-v1</a></p>
   <p lang="en">Adobe and Photoshop are either registered trademarks or trademarks of Adobe in the United States and/or other countries.</p>
   <p lang="vi">Adobe và Photoshop là nhãn hiệu hoặc nhãn hiệu đã đăng ký của Adobe tại Hoa Kỳ và/hoặc các quốc gia khác.</p>
 </div></footer>
