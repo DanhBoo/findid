@@ -267,9 +267,8 @@ html.tabbed .dlmain .pane + .pane { margin-top: 0; }  /* tabs show one pane: the
 .dlsec > h3 { font-size: var(--fs-lead); line-height: var(--lh-h3); margin: var(--s6) 0 var(--s3); }
 .dlsec > h2 + h3 { margin-top: 0; }
 ol.isteps { list-style: none; counter-reset: i; margin: 0; padding: 0; max-width: 40em; }
-ol.isteps li { counter-increment: i; position: relative; padding-left: 40px; margin: 0 0 var(--s3); min-height: 24px; }
-ol.isteps li::before { content: counter(i); position: absolute; left: 0; top: 0; width: 24px; height: 24px; border-radius: 4px;
-  background: var(--text); color: var(--bg); font: var(--fw-semi) var(--fs-cap)/24px var(--sans); text-align: center; }
+ol.isteps li { counter-increment: i; position: relative; padding-left: 28px; margin: 0 0 var(--s3); }
+ol.isteps li::before { content: counter(i) "."; position: absolute; left: 0; top: 0; color: var(--muted); } /* plain "1." in muted text (user 2026-11-24: number boxes "nổi bật quá") */
 .dlsec { padding-top: var(--s8); }
 .dlsec > h2 { margin: 0 0 var(--s4); }
 .dlsec > p { max-width: 40em; color: var(--muted); margin: 0 0 var(--s5); }
