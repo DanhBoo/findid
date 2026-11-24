@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FindID - plug-in for Adobe Photoshop®</title>
+<script>if(location.hash==='#faq')location.replace('faq.html'+location.search);</script>
 <meta name="description" content="FindID, plug-in for Adobe Photoshop®: drop an exported image and open the PSD / PSB it came from. Versions stay in the right project after a rename, move or copy.">
 <script>(function(){var t=null;try{t=localStorage.getItem('findid.theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="stylesheet" href="style.css">
@@ -19,9 +20,9 @@
   <nav class="menu">
     <a class="m-hide" href="#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
     <a class="m-hide" href="#how"><span lang="en">How FindID works</span><span lang="vi">FindID hoạt động thế nào</span></a>
-    <a class="m-hide" href="#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
+    <a class="m-hide" href="faq.html"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
     <a href="#comments"><span lang="en">Comments</span><span lang="vi">Bình luận</span></a>
-    <a class="m-hide" href="#support"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
+    <a class="m-hide" href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
   </nav>
   <div class="langs"><button type="button" data-set="en">EN</button><button type="button" data-set="vi">VI</button><button type="button" class="theme" id="theme-btn"><svg class="i-sun" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 13.5A9 9 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z"/></svg></button></div>
@@ -178,35 +179,18 @@
 </div>
 </div></section>
 
-<section class="block" id="faq"><div class="wrap faq">
-  <div><h2 lang="en">Questions</h2><h2 lang="vi">Câu hỏi</h2></div>
-  <div>
-    <details lang="en"><summary>Does FindID change my PSD files?</summary><p>It only adds a small ID to the file info (XMP) when you save. Layers and pixels are not touched.</p></details>
-    <details lang="vi"><summary>FindID có sửa file PSD của tôi không?</summary><p>Nó chỉ thêm một ID nhỏ vào phần thông tin file (XMP) lúc bạn lưu. Layer và điểm ảnh không bị đụng tới.</p></details>
-    <details lang="en"><summary>Is my artwork uploaded anywhere?</summary><p>No. FindID works on your computer only. Details: <a href="legal.html#privacy">Privacy policy</a>.</p></details>
-    <details lang="vi"><summary>Tranh của tôi có bị gửi đi đâu không?</summary><p>Không. FindID chỉ chạy trên máy bạn. Chi tiết: <a href="legal.html#privacy">Chính sách riêng tư</a>.</p></details>
-    <details lang="en"><summary>Which images can it trace back?</summary><p>Images saved with Save a Copy, Save As or Save for Web carry the ID and are found straight away. Others, such as Export As or a cropped copy, are compared by look and the closest PSD is shown.</p></details>
-    <details lang="vi"><summary>Ảnh nào thì tìm lại được PSD?</summary><p>Ảnh lưu bằng Save a Copy, Save As hay Save for Web mang ID nên tìm ra ngay. Ảnh khác, như Export As hay bản đã cắt, được so theo hình và hiện PSD giống nhất.</p></details>
-    <details lang="en"><summary>How much does FindID cost?</summary><p>1.99 USD, one-time purchase, on findid.app. On the Adobe Store the price is shown there. Details: <a href="download.html">Download page</a>.</p></details>
-    <details lang="vi"><summary>FindID giá bao nhiêu?</summary><p>1.99 USD, mua một lần, tại findid.app. Trên Adobe Store thì giá hiện ở đó. Chi tiết: <a href="download.html">trang Tải về</a>.</p></details>
-    <details lang="en"><summary>What do I need?</summary><p>Windows 10 or 11, or a Mac, with Adobe Photoshop® 2023 (24.0) or later. Install on Windows and Mac is the same: copy the FindID folder into Photoshop's Plug-ins folder (steps on the Download page).</p></details>
-    <details lang="vi"><summary>Cần máy thế nào?</summary><p>Windows 10 hoặc 11, hoặc máy Mac, cùng Adobe Photoshop® 2023 (bản 24.0) trở lên. Cài trên Windows và Mac như nhau: chép thư mục FindID vào thư mục Plug-ins của Photoshop (các bước ở trang Tải về).</p></details>
-  </div>
-</div></section>
-
-<section class="block" id="support"><div class="wrap">
-  <h2 class="head2" lang="en">Support</h2><h2 class="head2" lang="vi">Hỗ trợ</h2>
-  <p class="intro" lang="en">Email <a href="mailto:support@findid.app">support@findid.app</a> in English or Vietnamese. Include your FindID and Photoshop versions and what you clicked; a screenshot of the panel helps. More on the <a href="support.html">Support page</a>.</p>
-  <p class="intro" lang="vi">Email <a href="mailto:support@findid.app">support@findid.app</a> bằng tiếng Việt hoặc tiếng Anh. Ghi bản FindID, bản Photoshop và bạn vừa bấm gì; ảnh chụp panel sẽ giúp nhiều. Thêm ở <a href="support.html">trang Hỗ trợ</a>.</p>
-</div></section>
 </main>
 
 <footer class="bottom"><div class="wrap">
   <nav>
     <a href="index.html">FindID</a>
+    <a href="#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
+    <a href="#how"><span lang="en">How FindID works</span><span lang="vi">FindID hoạt động thế nào</span></a>
+    <a href="faq.html"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
+    <a href="#comments"><span lang="en">Comments</span><span lang="vi">Bình luận</span></a>
+    <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
     <a href="legal.html"><span lang="en">Licence &amp; Privacy</span><span lang="vi">Giấy phép &amp; Riêng tư</span></a>
-    <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
   </nav>
   <p lang="en">Artist: <a href="https://danhboo.github.io/danh-portfolio-v1/" target="_blank" rel="noopener">danhboo.github.io/danh-portfolio-v1</a></p>
   <p lang="vi">Hoạ sĩ: <a href="https://danhboo.github.io/danh-portfolio-v1/" target="_blank" rel="noopener">danhboo.github.io/danh-portfolio-v1</a></p>

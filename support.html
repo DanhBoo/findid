@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FindID support</title>
+<script>if(location.hash==='#faq')location.replace('faq.html'+location.search);</script>
 <script>(function(){var t=null;try{t=localStorage.getItem('findid.theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -17,7 +18,7 @@
   <nav class="menu">
     <a class="m-hide" href="index.html#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
     <a class="m-hide" href="index.html#how"><span lang="en">How FindID works</span><span lang="vi">FindID hoạt động thế nào</span></a>
-    <a class="m-hide" href="index.html#faq"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
+    <a class="m-hide" href="faq.html"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
     <a href="index.html#comments"><span lang="en">Comments</span><span lang="vi">Bình luận</span></a>
     <a class="m-hide" href="support.html" aria-current="page"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
@@ -45,28 +46,6 @@
 <p><b>Trợ giúp trong panel.</b> Để chuột lên nút hay dòng để xem giải thích; Cài đặt → Xem hướng dẫn lại để xem lại các bước đầu.</p>
 </section>
 </div>
-<div class="part" id="faq">
-<h2 lang="en">Common questions</h2>
-<h2 lang="vi">Câu hỏi thường gặp</h2>
-<section lang="en">
-<details><summary>The first scan takes a long time.</summary><p>The first ID scan reads every Photoshop file and exported image in your scan folders, so it can take several minutes, longer with many images. Later scans read only new or changed files and usually finish in seconds.</p></details>
-<details><summary>How do I make a new version?</summary><p>Use File → Save As with a new name. The new file appears right above the file it came from.</p></details>
-<details><summary>I renamed or moved a file. Is it lost?</summary><p>No. FindID writes a small ID into the file, so it still knows the file after a rename, move or copy. If you moved it outside your scan folders, add the new folder in Settings → Folders to scan.</p></details>
-<details><summary>FindID can't find the PSD of an exported image?</summary><p>Save As, Save a Copy and Save for Web keep the ID in the image; Export As and Quick Export do not. An image first saved with Save As or Save a Copy that later lost its ID (for example saved again from another website) is still matched to its PSD while the picture is whole. A cropped image without an ID is still found in most cases.</p></details>
-<details><summary>Does FindID upload my files?</summary><p>No. It runs only on your computer and sends nothing over the internet.</p></details>
-<details><summary>Can I use it on more than one computer?</summary><p>Yes, on any number of computers you use yourself. A team needs one licence per person.</p></details>
-<details><summary>I lost my download link.</summary><p>Bought on findid.app: open the receipt email from Creem, which has the download link, or write to <a href="mailto:support@findid.app">support@findid.app</a> from the email you bought with. Bought on Adobe Creative Cloud Marketplace: Creative Cloud installs it again for you. You never pay twice.</p></details>
-</section>
-<section lang="vi">
-<details><summary>Lần quét đầu lâu quá.</summary><p>Lần quét ID đầu tiên đọc mọi file Photoshop và ảnh đã xuất trong các thư mục quét, nên có thể mất vài phút, nhiều ảnh thì lâu hơn. Những lần sau chỉ đọc file mới hoặc đã đổi, thường xong trong vài giây.</p></details>
-<details><summary>Tạo version mới thế nào?</summary><p>Dùng File → Save As với tên mới. File mới hiện ngay trên file gốc của nó.</p></details>
-<details><summary>Đổi tên hay chuyển file đi chỗ khác thì có mất không?</summary><p>Không. FindID ghi một ID nhỏ vào file, nên vẫn nhận ra file sau khi đổi tên, chuyển chỗ hay sao chép. Nếu chuyển ra ngoài các thư mục quét, thêm thư mục mới ở Cài đặt → Thư mục quét.</p></details>
-<details><summary>FindID không tìm ra PSD của một ảnh đã xuất?</summary><p>Save As, Save a Copy và Save for Web giữ ID trong ảnh; Export As và Quick Export thì không. Ảnh đã lưu bằng Save As hay Save a Copy mà sau đó mất ID (vd lưu lại từ một trang web khác) vẫn tìm ra PSD khi ảnh còn nguyên vẹn. Ảnh bị crop và mất ID thì hầu hết trường hợp vẫn tìm ra.</p></details>
-<details><summary>FindID có tải file của tôi lên mạng không?</summary><p>Không. FindID chỉ chạy trên máy bạn và không gửi gì lên mạng.</p></details>
-<details><summary>Dùng trên nhiều máy được không?</summary><p>Được, trên bao nhiêu máy cũng được nếu là máy của chính bạn. Nhóm nhiều người thì mỗi người một bản quyền.</p></details>
-<details><summary>Mất link tải.</summary><p>Mua trên findid.app: mở email hoá đơn của Creem, trong đó có link tải, hoặc gửi mail tới <a href="mailto:support@findid.app">support@findid.app</a> bằng email đã dùng để mua. Mua trên Adobe Creative Cloud Marketplace: Creative Cloud tự cài lại cho bạn. Không bao giờ phải mua lại.</p></details>
-</section>
-</div>
 <div class="part" id="refunds">
 <h2 lang="en">Refunds</h2>
 <h2 lang="vi">Hoàn tiền</h2>
@@ -85,9 +64,13 @@
 <footer class="bottom"><div class="wrap">
   <nav>
     <a href="index.html">FindID</a>
+    <a href="index.html#features"><span lang="en">Features</span><span lang="vi">Tính năng</span></a>
+    <a href="index.html#how"><span lang="en">How FindID works</span><span lang="vi">FindID hoạt động thế nào</span></a>
+    <a href="faq.html"><span lang="en">Questions</span><span lang="vi">Câu hỏi</span></a>
+    <a href="index.html#comments"><span lang="en">Comments</span><span lang="vi">Bình luận</span></a>
+    <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
     <a href="download.html"><span lang="en">Download</span><span lang="vi">Tải về</span></a>
     <a href="legal.html"><span lang="en">Licence &amp; Privacy</span><span lang="vi">Giấy phép &amp; Riêng tư</span></a>
-    <a href="support.html"><span lang="en">Support</span><span lang="vi">Hỗ trợ</span></a>
   </nav>
   <p lang="en">Adobe and Photoshop are either registered trademarks or trademarks of Adobe in the United States and/or other countries.</p>
   <p lang="vi">Adobe và Photoshop là nhãn hiệu hoặc nhãn hiệu đã đăng ký của Adobe tại Hoa Kỳ và/hoặc các quốc gia khác.</p>
