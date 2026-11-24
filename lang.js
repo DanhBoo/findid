@@ -27,7 +27,14 @@
   }
   function pics() {
     var ss = document.querySelectorAll('picture source[media]');
-    for (var i = 0; i < ss.length; i++) ss[i].setAttribute('media', theme() === 'dark' ? 'all' : 'not all');
+    for (var i = 0; i < ss.length; i++) {
+      // first media kept in data-media; only sources with the dark condition switch, a width condition (hero, <= 900 px) stays
+      var m = ss[i].getAttribute('data-media');
+      if (m === null) { m = ss[i].getAttribute('media'); ss[i].setAttribute('data-media', m); }
+      if (m.indexOf('prefers-color-scheme: dark') < 0) continue;
+      var w = m.replace(/\s*and\s*\(prefers-color-scheme: dark\)/, '').replace('(prefers-color-scheme: dark)', '').trim();
+      ss[i].setAttribute('media', theme() === 'dark' ? (w || 'all') : 'not all');
+    }
   }
   function setTheme(t) {
     root.setAttribute('data-theme', t);
