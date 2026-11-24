@@ -249,7 +249,7 @@ footer.bottom p { margin: 0 0 var(--s1); max-width: 60em; font-size: var(--fs-ca
 html.tabbed .pane:not(.on) { display: none; }
 .dlmain .btn.big { min-width: 340px; }
 .dlmain .cc { font-size: var(--fs-sm); color: var(--muted); margin: var(--s2) 0 0; text-align: center; }
-.dlmain .terms { font-size: var(--fs-cap); color: var(--muted); margin: var(--s5) 0 0; text-align: center; }
+.dlmain .terms { font-size: var(--fs-sm); color: var(--muted); margin: var(--s5) 0 0; text-align: center; }
 .dlmain .pane + .pane { margin-top: var(--s6); }
 html.tabbed .dlmain .pane + .pane { margin-top: 0; }  /* tabs show one pane: the gap is only for the no-JS view where both panes stack */
 .dlvisual { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: var(--s6); display: flex; justify-content: center; }
